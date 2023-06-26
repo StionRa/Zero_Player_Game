@@ -1,1 +1,40 @@
 # Zero_Player_Game
+
+Структура проекта:
+ - Zero_Player_Game
+   - manage.py
+   - db.sqlite3
+   - README.md
+   - Zero_Player_Game
+
+      - asgi.py
+      - setting.py
+      - urls.py
+      - wsgi.py
+   - game
+
+      - admin.py
+      - apps.py
+      - character_models.py
+      - create_character_utils.py
+      - forms.py
+      - game_options.py
+      - location_model.py
+      - map_generator.py
+      - movement_model.py
+      - print_map.py
+      - views.py
+      - static
+        - css
+          - style.css
+        - js
+      - templates
+        - game
+          - base.html
+          - create_character.html
+          - game.html
+          - game_index.html
+          - game_info.html
+          - index.html
+          - login.html
+          - registration.html

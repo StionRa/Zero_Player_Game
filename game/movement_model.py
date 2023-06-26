@@ -1,8 +1,4 @@
-from .map_generator import load_map, add_map_part
-import game.game_options as opt
-
-width = opt.WIDTH
-height = opt.HEIGHT
+from .map_generator import load_map
 
 
 def move_character(character, move):
@@ -10,45 +6,24 @@ def move_character(character, move):
     x = character.x
     y = character.y
 
-    if move == 'w' and y > 0:
+    if move == 'w':
         if map_data[y - 1][x]:
             character.y -= 1
             character.save()
             return True
-    elif move == 'w' and y == 0:
-        add_map_part(width, height, 'top')
-        character.y = 1
-        character.save()
-        return True
-    elif move == 'a' and x > 0:
+    elif move == 'a':
         if map_data[y][x - 1]:
             character.x -= 1
             character.save()
             return True
-    elif move == 'a' and x == 0:
-        add_map_part(width, height, 'left')
-        character.x = 1
-        character.save()
-        return True
-    elif move == 's' and y < height - 1:
+    elif move == 's':
         if map_data[y + 1][x]:
             character.y += 1
             character.save()
             return True
-    elif move == 's' and y == height - 1:
-        add_map_part(width, height, 'bottom')
-        character.y = 1
-        character.save()
-        return True
-    elif move == 'd' and x < width - 1:
+    elif move == 'd':
         if map_data[y][x + 1]:
             character.x += 1
             character.save()
             return True
-    elif move == 'd' and x == width - 1:
-        add_map_part(width, height, 'right')
-        character.x = 1
-        character.save()
-        return True
-
     return False

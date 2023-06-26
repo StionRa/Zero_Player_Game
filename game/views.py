@@ -4,9 +4,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .character_models import Character
-from .map_generator import generate_map, load_map, check_map_existence
+from .map_generator import generate_map, load_map, check_map_existence, check_and_extend_map
 from .print_map import generate_map_html
 from .movement_model import move_character
+import random
+from game.animal_generator import generate_animals
 
 
 def index_view(request):
@@ -73,11 +75,13 @@ def game_index_view(request):
 
         map_data = load_map()
         map_html = generate_map_html(map_data, x, y)
+        check_and_extend_map(x, y)
+        generate_animals()
 
-        return render(request, 'game/game_index.html', {'has_character': has_character, 'character': character, 'map_html': map_html})
+        return render(request, 'game/game_index.html',
+                      {'has_character': has_character, 'character': character, 'map_html': map_html})
     else:
         return render(request, 'game/game_index.html', {'has_character': has_character})
-
 
 
 @login_required
