@@ -1,5 +1,20 @@
 {name} атаковал {animal}. Здоровье {animal}: {animal_health}
-{name} прыгнул верхом на спину {animal}. Здоровье {animal}: {animal_health}
-{name} дерзко упал, напугав {animal}. Здоровье {animal}: {animal_health}
+{name} с ловкостью прыгнул верхом на спину {animal}. Здоровье {animal}: {animal_health}
+{name} дерзко упал перед {animal}, напугав его. Здоровье {animal}: {animal_health}
 {name} заикнулся на честь {animal}. Здоровье {animal}: {animal_health}
 {name} подмигнул глазом {animal}. Здоровье {animal}: {animal_health}
+{name} атаковал {animal}. Здоровье {animal}: {animal_health}
+{name} нанес удар по {animal}. Здоровье {animal}: {animal_health}
+{name} с силой ударил {animal}. Здоровье {animal}: {animal_health}
+{name} крепко атаковал {animal}. Здоровье {animal}: {animal_health}
+{name} с ловкостью атаковал {animal}. Здоровье {animal}: {animal_health}
+{name} прыгнул верхом на спину {animal}. Здоровье {animal}: {animal_health}
+{name} смело вскочил на спину {animal}. Здоровье {animal}: {animal_health}
+{name} решил сразить {animal} издалека. Здоровье {animal}: {animal_health}
+{name} дерзко упал, напугав {animal}. Здоровье {animal}: {animal_health}
+{name} решил испугать {animal}. Здоровье {animal}: {animal_health}
+{name} заикнулся на честь {animal}. Здоровье {animal}: {animal_health}
+{name} намекнул на силу {animal}. Здоровье {animal}: {animal_health}
+{name} подмигнул глазом {animal}. Здоровье {animal}: {animal_health}
+{name} проявил мастерство в атаке {animal}. Здоровье {animal}: {animal_health}
+{name} решил проверить свои силы на {animal}. Здоровье {animal}: {animal_health}

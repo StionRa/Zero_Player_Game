@@ -59,16 +59,29 @@ def handle_encounter(character, target_x, target_y):
             sleep(2)
             # Проверка условия окончания битвы
             if animal.health <= 0:
-
-                print("{animal.name} проиграло в битве.")
-                action_description = "{animal.name} проиграло в битве."
+                action_description = choice(open('game/text/battle/animal_lose_battle.txt').readlines()).format(
+                    name=character.name,
+                    species=animal.species,
+                    animal=animal.name,
+                    x=target_x,
+                    y=target_y,
+                    animal_health=animal.health,
+                    character_health=character.health
+                )
                 ActionLog.objects.create(description=action_description, character=character)
                 # Удаление животного из базы данных
                 animal.delete()
             elif character.health <= 0:
                 # Персонаж проиграл
-                print("{character.name} проиграл в битве.")
-                action_description = "{character.name} проиграл в битве."
+                action_description = choice(open('game/text/battle/character_lose_battle.txt').readlines()).format(
+                    name=character.name,
+                    species=animal.species,
+                    animal=animal.name,
+                    x=target_x,
+                    y=target_y,
+                    animal_health=animal.health,
+                    character_health=character.health
+                )
                 ActionLog.objects.create(description=action_description, character=character)
                 # Перенос персонажа на координаты (0, 0)
                 character.x = 0

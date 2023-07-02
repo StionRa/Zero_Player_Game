@@ -1,6 +1,15 @@
 {animal} атаковало {name}. Здоровье {name}: {character_health}
+{animal} нанесло удар по {name}. Здоровье {name}: {character_health}
+{animal} с силой атаковало {name}. Здоровье {name}: {character_health}
+{animal} бросило вызов {name}. Здоровье {name}: {character_health}
 {animal} перепрыгнуло либидо {name}. Здоровье {name}: {character_health}
+{animal} смело прыгнуло на {name}. Здоровье {name}: {character_health}
 {animal} ударило в удар {name}. Здоровье {name}: {character_health}
-{animal} застанило выговаривать {name} - Кувырок с преподвыподвертом! Здоровье {name}: {character_health}
-{animal} фуркнув, пришил яйца {name}. Здоровье {name}: {character_health}
+{animal} неожиданно атаковало {name}. Здоровье {name}: {character_health}
+{animal} заставило выговаривать {name} - Кувырок с преподвыподвертом! Здоровье {name}: {character_health}
+{animal} фуркнув, пришило яйца {name}. Здоровье {name}: {character_health}
 {animal} нагадило пафосно в тапочки {name}. Здоровье {name}: {character_health}
+{animal} отразило атаку {name}. Здоровье {name}: {character_health}
+{animal} проявило свою ярость на {name}. Здоровье {name}: {character_health}
+{animal} разорвало {name} своими когтями. Здоровье {name}: {character_health}
+{animal} ударило смертельным ударом по {name}. Здоровье {name}: {character_health}

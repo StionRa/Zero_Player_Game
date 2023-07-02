@@ -2,6 +2,7 @@
 from game.location_model import Location
 from game.actionlog_model import ActionLog
 from game.pathfinding import a_star_search
+from random import choice
 
 
 def move(character, target_x, target_y):
@@ -10,7 +11,11 @@ def move(character, target_x, target_y):
         character.x = target_x
         character.y = target_y
         character.save()
-        action_description = f"Добрался до локации {target_x}, {target_y}"
+        action_description = choice(open('game/text/travel/travel.txt').readlines()).format(
+            name=character.name,
+            x=target_x,
+            y=target_y,
+        )
         ActionLog.objects.create(description=action_description, character=character)
     else:
         print(f"Ячейка с координатами ({target_x}, {target_y}) не проходима или не существует.")
