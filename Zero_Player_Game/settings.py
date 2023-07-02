@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'celery',
     'django.contrib.humanize',
     'game.apps.GameConfig',
 ]
@@ -120,3 +121,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'game/static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = "index"
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # URL брокера сообщений, например, Redis
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # URL бэкенда результатов, также может быть Redis
+

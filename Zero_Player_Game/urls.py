@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from game.views import index_view, game_info_view, game_index_view, register, user_login, logout_view, game
+from game.views import index_view, game_info_view, game_index_view, register, user_login, \
+    logout_view, game, map_fragment, info_line
 from game.create_character_utils import create_character
 
 urlpatterns = [
@@ -38,4 +39,6 @@ urlpatterns = [
     # Путь к странице личного кабинета (game_index)
     path('game_index/', game_index_view, name='game_index'),
     path('game/', game, name='game'),
+    path('map_fragment/', map_fragment, name='map_fragment'),
+    path('info_line/', info_line, name='info_line'),
 ]

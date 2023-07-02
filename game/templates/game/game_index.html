@@ -1,32 +1,54 @@
-<!-- game_index.html -->
 {% extends 'game/base.html' %}
+{% load static %}
 
 {% block content %}
+<script src="{% static 'js/jquery-3.7.0.js' %}"></script>
+<script>
+    function updateMapFragment() {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const mapFragment = document.getElementById('map-fragment');
+                mapFragment.innerHTML = xhr.responseText;
+            }
+        };
+        xhr.open('GET', '{% url "map_fragment" %}', true);
+        xhr.send();
+    }
+
+    setInterval(updateMapFragment, 5000);  // Обновление каждые 5 секунд (5000 миллисекунд)
+</script>
+    <script>
+    function updateInfoLine() {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const info_line = document.getElementById('info_line');
+                info_line.innerHTML = xhr.responseText;
+            }
+        };
+        xhr.open('GET', '{% url "info_line" %}', true);
+        xhr.send();
+    }
+
+    setInterval(updateInfoLine, 5000);  // Обновление каждые 5 секунд (5000 миллисекунд)
+</script>
+
     <h1>Личный кабинет пользователя</h1>
 
-{% if has_character %}
-    <h2>Welcome {{ character.name }}</h2>
-    <p>Location: ({{ character.x }}, {{ character.y }})</p>
-
-    <div class="map">
-        {{ map_html|safe }}
-    </div>
-    <form method="POST">
-  {% csrf_token %}
-  <label>Move:</label><br>
-  <button type="submit" name="move" value="w">Up</button><br>
-  <button type="submit" name="move" value="a">Left</button>
-  <button type="submit" name="move" value="s">Down</button>
-  <button type="submit" name="move" value="d">Right</button>
-</form>
-
-  {% else %}
-    <p>Create a character to start playing the game!</p>
-    <a href="{% url 'create_character' %}">Create Character</a>
-  {% endif %}
+    {% if has_character %}
 
 
-{% if error_message %}
-  <p>{{ error_message }}</p>
-{% endif %}
+        {% include 'game/map_fragment.html' %}
+        {% include 'game/info_line.html' %}
+
+
+    {% else %}
+        <p>Create a character to start playing the game!</p>
+        <a href="{% url 'create_character' %}">Create Character</a>
+    {% endif %}
+
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
 {% endblock %}

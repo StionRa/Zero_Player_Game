@@ -1,0 +1,8 @@
+<!-- info_line.html -->
+<div class="info_line" id="info_line">
+    {% for action_log in action_logs %}
+        <p>{{ action_log.timestamp }} - {{ action_log.description }}</p>
+    {% empty %}
+        <p>No recent actions.</p>
+    {% endfor %}
+</div>

@@ -1,16 +1,13 @@
 from random import choice
 import random
 from game.animal_model import Dog, Cat, Animal
-from .map_generator import load_map
+from game.map_generator import load_map
 from game.game_options import MAX_ANIMALS_ON_MAP
-
-GRID_SIZE = 20  # Size of the grid
 
 
 def calculate_grid_count(map_data):
-    passable_count = sum(sum(row) for row in map_data)  # Total number of passable cells
-    grid_count = (passable_count // GRID_SIZE)  # Total number of grids
-    return grid_count
+    passable_count = len(map_data)
+    return passable_count
 
 
 def generate_animals():
@@ -23,10 +20,8 @@ def generate_animals():
 
     # Вычисляем количество ячеек в сетке
     grid_count = calculate_grid_count(map_data)
-
-    # Проверяем, если количество животных на карте меньше максимального, добавляем новых
-    current_animal_count = Animal.objects.count()
-    if current_animal_count < MAX_ANIMALS_ON_MAP*grid_count:
+    animal_count = MAX_ANIMALS_ON_MAP * grid_count
+    if animal_count > 0:
         # Генерируем случайное животное
         animal_class = choice([Dog, Cat])
 

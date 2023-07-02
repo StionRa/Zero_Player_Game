@@ -3,12 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from game.actionlog_model import ActionLog
 from .character_models import Character
-from .map_generator import generate_map, load_map, check_map_existence, check_and_extend_map
-from .print_map import generate_map_html
-from .movement_model import move_character
-import random
-from game.animal_generator import generate_animals
+from .map_generator import load_map
+from .print_map import print_map
+from game.tasks import update_character_state
+from game.utils import start_game
 
 
 def index_view(request):
@@ -52,36 +52,9 @@ def register(request):
 def game_index_view(request):
     user = request.user
     has_character = Character.objects.filter(user=user).exists()
-
-    if request.method == 'POST':
-        if not has_character:
-            return redirect('create_character')
-        else:
-            move = request.POST.get('move')
-            if move in ['w', 'a', 's', 'd']:
-                character = Character.objects.get(user=user)
-                moved = move_character(character, move)
-                if not moved:
-                    messages.error(request, 'Invalid move. Try again.')
-                    return redirect('game_index')
-
-    if has_character:
-        character = Character.objects.get(user=user)
-        x = character.x
-        y = character.y
-
-        if not check_map_existence():
-            generate_map()  # Генерация и сохранение карты, если она не существует
-
-        map_data = load_map()
-        map_html = generate_map_html(map_data, x, y)
-        check_and_extend_map(x, y)
-        generate_animals()
-
-        return render(request, 'game/game_index.html',
-                      {'has_character': has_character, 'character': character, 'map_html': map_html})
-    else:
-        return render(request, 'game/game_index.html', {'has_character': has_character})
+    update_character_state.delay()
+    return render(request, 'game/game_index.html',
+                  {'has_character': has_character})
 
 
 @login_required
@@ -90,4 +63,24 @@ def game(request):
     if request.user.is_authenticated:
         return render(request, 'game/game.html')
     else:
-        return redirect('login')  # Если пользователь не авторизован, перенаправить на страницу логина
+        return redirect('login')
+
+
+@login_required
+def map_fragment(request):
+    user = request.user
+    character = Character.objects.get(user=user)
+    x = character.x
+    y = character.y
+    map_data = load_map()
+    map_html = print_map(map_data, x, y)
+    conti = {'character': character, "map_data": map_data, "map_html": map_html}
+    return render(request, 'game/map_fragment.html', conti)
+
+
+def info_line(request):
+    user = request.user
+    character = Character.objects.get(user=user)
+    start_game()
+    action_logs = ActionLog.objects.filter(character=character).order_by('-timestamp')[:10]
+    return render(request, 'game/info_line.html', {'action_logs': action_logs})
