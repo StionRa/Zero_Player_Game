@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+import random
 
 class Character(models.Model):
     GENDER_CHOICES = (
@@ -29,6 +29,7 @@ class Character(models.Model):
     health = models.IntegerField(default=100)
     strength = models.IntegerField(default=10)
     dexterity = models.IntegerField(default=10)
+    defense = models.IntegerField(default=10)
     intelligence = models.IntegerField(default=10)
     energy = models.IntegerField(default=10)
     speed = models.IntegerField(default=10)
@@ -39,3 +40,7 @@ class Character(models.Model):
     accuracy = models.IntegerField(default=10)
     x = models.IntegerField(default=0)
     y = models.IntegerField(default=0)
+
+    def attack(self, target):
+        damage = self.strength * 3 - target.defense * 0.2
+        target.health -= int(damage)

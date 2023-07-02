@@ -1,0 +1,5 @@
+{name} атаковал {animal}. Здоровье {animal}: {animal_health}
+{name} прыгнул верхом на спину {animal}. Здоровье {animal}: {animal_health}
+{name} дерзко упал, напугав {animal}. Здоровье {animal}: {animal_health}
+{name} заикнулся на честь {animal}. Здоровье {animal}: {animal_health}
+{name} подмигнул глазом {animal}. Здоровье {animal}: {animal_health}

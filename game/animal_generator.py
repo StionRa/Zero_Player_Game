@@ -1,8 +1,10 @@
 from random import choice
 import random
-from game.animal_model import Dog, Cat, Animal
+from game.animal_model import Dog, Cat
 from game.map_generator import load_map
 from game.game_options import MAX_ANIMALS_ON_MAP
+from game.location_model import Location
+from django.db import models
 
 
 def calculate_grid_count(map_data):
@@ -34,13 +36,17 @@ def generate_animals():
         # Создаем экземпляр животного
         animal = animal_class(name=name, age=0, species=animal_class.__name__, health=100,
                               health_max=100, stamina_max=100, stamina=100, strength=random.randint(1, 10),
-                              dexterity=random.randint(1, 10), speed=random.randint(1, 10),
+                              dexterity=random.randint(1, 10), defense=random.randint(1, 10), speed=random.randint(1, 10),
                               regeneration=random.randint(1, 10))
 
         # Получаем доступные координаты для размещения животного
         available_coordinates = []
-        for y in range(len(map_data)):
-            for x in range(len(map_data[y])):
+        global_min_x = Location.objects.aggregate(models.Min('x'))['x__min']
+        global_max_x = Location.objects.aggregate(models.Max('x'))['x__max']
+        global_min_y = Location.objects.aggregate(models.Min('y'))['y__min']
+        global_max_y = Location.objects.aggregate(models.Max('y'))['y__max']
+        for y in range(global_min_y, global_max_y):
+            for x in range(global_min_x, global_max_x):
                 if map_data[y][x]:
                     available_coordinates.append((x, y))
 

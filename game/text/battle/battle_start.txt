@@ -1,0 +1,4 @@
+{name} встретил {species} {animal} на координатах ({x}, {y})
+{name} повстречал {animal}
+{name} встретил {animal}
+{name} споткнулся о {species}

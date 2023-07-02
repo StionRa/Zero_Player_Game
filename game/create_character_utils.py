@@ -28,6 +28,7 @@ def create_character(request):
                                              health=100,
                                              strength=random.randint(1, 10),
                                              dexterity=random.randint(1, 10),
+                                             defense=random.randint(1, 10),
                                              intelligence=random.randint(1, 10),
                                              energy=random.randint(1, 10),
                                              speed=random.randint(1, 10),

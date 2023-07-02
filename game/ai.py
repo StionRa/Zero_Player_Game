@@ -29,15 +29,6 @@ def make_decision_and_move(character, target_x, target_y):
         target_point = target_x, target_y
 
         return start_point, target_point
-    #     path = a_star_search(start_point, target_point)
-    #     if path is not None:
-    #         print(path)
-    #         for point in path:
-    #             move(character, point[0], point[1])
-    #     else:
-    #         print("Невозможно найти допустимый путь к цели.")
-    # else:
-    #     print("Недопустимые координаты цели.")
 
 
 def take_path(start_point, target_point):

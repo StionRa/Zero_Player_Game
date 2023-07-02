@@ -15,12 +15,17 @@ class Animal(models.Model):
     dexterity = models.IntegerField(default=10)
     speed = models.IntegerField(default=10)
     regeneration = models.IntegerField(default=10)
+    defense = models.IntegerField(default=10)
 
     def speak(self):
         pass
 
     def eat(self):
         pass
+
+    def attack(self, target):
+        damage = self.strength * 3 - target.defense * 0.2
+        target.health -= int(damage)
 
 
 class Dog(Animal):

@@ -1,0 +1,6 @@
+{animal} атаковало {name}. Здоровье {name}: {character_health}
+{animal} перепрыгнуло либидо {name}. Здоровье {name}: {character_health}
+{animal} ударило в удар {name}. Здоровье {name}: {character_health}
+{animal} застанило выговаривать {name} - Кувырок с преподвыподвертом! Здоровье {name}: {character_health}
+{animal} фуркнув, пришил яйца {name}. Здоровье {name}: {character_health}
+{animal} нагадило пафосно в тапочки {name}. Здоровье {name}: {character_health}

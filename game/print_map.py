@@ -25,16 +25,20 @@ def print_map(map_x, character_x_navi, character_y_navi):
             elif animal:
                 symbol = '='
             else:
-                if x >= min_x and y >= min_y:  # Добавляем проверку на положительные координаты
-                    cell = map_x[y][x]
-                    if cell is None:
-                        symbol = 'X'
-                    elif cell:
-                        symbol = '.'
-                    else:
-                        symbol = '#'
+                if x >= min_x and y >= min_y:
+                    try:
+                        cell = map_x[y][x]
+                        if cell is None:
+                            symbol = 'X'
+                        elif cell:
+                            symbol = '.'
+                        else:
+                            symbol = '#'
+                    except IndexError:
+                        symbol = 'X'  # Handle missing coordinates with 'X'
+
                 else:
-                    symbol = 'X'  # Используем символ 'X' для отображения недопустимых координат
+                    symbol = 'X'  # Use 'X' to represent invalid coordinates
 
             cell_color = get_cell_color(symbol)
             html_output += f"<div class='map-location' style='background-color: {cell_color};'></div>"
