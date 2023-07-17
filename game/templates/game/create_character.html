@@ -1,6 +1,9 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
+    {% load static %}
+    <div class="card mb-5">
+  <div class="card-body">
   <h2>Create Your Character</h2>
   <form method="POST" action="{% url 'create_character' %}">
     {% csrf_token %}
@@ -18,9 +21,121 @@
       <option value="Human">Human</option>
       <option value="Elf">Elf</option>
       <option value="Dwarf">Dwarf</option>
+      <option value="Orc">Orc</option>
+      <option value="Goblin">Goblin</option>
+      <option value="Zombie">Zombie</option>
+      <option value="Skeleton">Skeleton</option>
+      <option value="Centaur">Centaur</option>
+      <option value="Gryphon">Gryphon</option>
+      <option value="Nymph">Nymph</option>
+      <option value="Vampire">Vampire</option>
+      <option value="Gul">Gul</option>
+      <option value="Cyborg">Cyborg</option>
+      <option value="Robot">Robot</option>
+      <option value="Mutant">Mutant</option>
+      <option value="Cyborg Elf">Cyborg Elf</option>
+      <option value="Goblin Geneticist">Goblin Geneticist</option>
+      <option value="Orc Mechanic">Orc Mechanic</option>
+      <option value="Humanoids">Humanoids</option>
+      <!-- Add more race options as needed -->
+    </select>
+    <br>
+      <label for="profession">Professions:</label>
+    <select id="profession" name="profession" required>
+      <option value="Warrior">Warrior</option>
+      <option value="The Magician">The Magician</option>
+      <option value="Scout">Scout</option>
+      <option value="Engineer">Engineer</option>
+      <option value="Healer">Healer</option>
+      <option value="Merchant">Merchant</option>
+      <option value="Artisan">Artisan</option>
+      <option value="Traveller">Traveller</option>
+      <option value="Researcher">Researcher</option>
       <!-- Add more race options as needed -->
     </select>
     <br>
     <button type="submit">Create</button>
   </form>
+</div>
+</div>
+    <div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+        <h5 class="card-title">Race</h5>
+      <a class="list-group-item list-group-item-action active" id="list-human-list" data-bs-toggle="list" href="#Human" role="tab" aria-controls="list-human">Human</a>
+      <a class="list-group-item list-group-item-action" id="list-elf-list" data-bs-toggle="list" href="#Elf" role="tab" aria-controls="list-elf">Elf</a>
+      <a class="list-group-item list-group-item-action" id="list-dwarf-list" data-bs-toggle="list" href="#Dwarf" role="tab" aria-controls="list-dwarf">Dwarf</a>
+      <a class="list-group-item list-group-item-action" id="list-orc-list" data-bs-toggle="list" href="#Orc" role="tab" aria-controls="list-orc">Orc</a>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="Human" role="tabpanel" aria-labelledby="list-human-list"></div>
+      <div class="tab-pane fade" id="Elf" role="tabpanel" aria-labelledby="list-elf-list"><p></p></div>
+      <div class="tab-pane fade" id="Dwarf" role="tabpanel" aria-labelledby="list-dwarf-list"></div>
+      <div class="tab-pane fade" id="Orc" role="tabpanel" aria-labelledby="list-orc-list"></div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    loadRaceDescription('Human', '#Human'); // Загрузка описания расы "Human" в элемент с id "Human"
+
+    function loadRaceDescription(race, elementId) {
+      $.ajax({
+        url: "{% static 'description/race/' %}" + race + '.txt',
+        dataType: 'text',
+        success: function(data) {
+          $(elementId).text(data);
+        }
+      });
+    }
+  });
+</script>
+    <script>
+  $(document).ready(function() {
+    loadRaceDescription('Elf', '#Elf'); // Загрузка описания расы "Elf" в элемент с id "Elf"
+
+    function loadRaceDescription(race, elementId) {
+      $.ajax({
+        url: "{% static 'description/race/' %}" + race + '.txt',
+        dataType: 'text',
+        success: function(data) {
+          $(elementId).text(data);
+        }
+      });
+    }
+  });
+</script>
+        <script>
+  $(document).ready(function() {
+    loadRaceDescription('Dwarf', '#Dwarf'); // Загрузка описания расы "Dwarf" в элемент с id "Dwarf"
+
+    function loadRaceDescription(race, elementId) {
+      $.ajax({
+        url: "{% static 'description/race/' %}" + race + '.txt',
+        dataType: 'text',
+        success: function(data) {
+          $(elementId).text(data);
+        }
+      });
+    }
+  });
+</script>
+            <script>
+  $(document).ready(function() {
+    loadRaceDescription('Orc', '#Orc'); // Загрузка описания расы "Orc" в элемент с id "Orc"
+
+    function loadRaceDescription(race, elementId) {
+      $.ajax({
+        url: "{% static 'description/race/' %}" + race + '.txt',
+        dataType: 'text',
+        success: function(data) {
+          $(elementId).text(data);
+        }
+      });
+    }
+  });
+</script>
 {% endblock %}

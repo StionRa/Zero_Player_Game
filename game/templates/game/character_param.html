@@ -1,0 +1,48 @@
+<!-- character_param.html -->
+<div class="character_param" id="character_param">
+    <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <span class="nav-link">Name: {{ character.name }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Level: {{ character.level }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Exp: {{ character.experience }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Health: {{ character.health }}/{{ character.health_max }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Mana: {{ character.mana }}/{{ character.mana_max }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Stamina: {{ character.stamina }}/{{ character.stamina_max }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Str: {{ character.strength }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Dex: {{ character.dexterity }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Def: {{ character.defense }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Int: {{ character.intelligence }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">coord: {{ character.x }}, {{ character.y }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Quest: {{ user.character.is_quest_completed }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Energy: {{ user.character.energy }}</span>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">Speed: {{ user.character.speed }}</span>
+            </li>
+            <!-- Add more character attributes as needed -->
+        </ul>
+</div>

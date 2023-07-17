@@ -2,9 +2,43 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
-    <h1>Game Information</h1>
 
-    <p>Character position: <span id="character-position">-</span></p>
+<div class="head">
+    <div>
+       <header>Merging Realities Information</header>
+    </div>
+    <div class="subhead">Everything about ..</div>
+</div>
 
-    <!-- Rest of the game information -->
+
+
+<div class="row row-cols-1 row-cols-md-1 g-4 m-1">
+{% for news_item in news %}
+<div class="col">
+
+                <div class="card border-secondary h-100">
+
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            {{ news_item.author }}
+                        </div>
+                        <div>
+                            <span class="badge rounded-pill bg-primary">{{ category.name }}</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news_item.title }}</h5>
+                        <p class="card-text">{{ news_item.text|linebreaksbr }}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ news_item.created_at|date:"F d, Y, H:i" }}
+                    </div>
+                </div>
+
+</div>
+    {% empty %}
+    <p>No news available for this category</p>
+{% endfor %}
+</div>
+
 {% endblock %}

@@ -2,10 +2,42 @@
 {% extends 'game/base.html' %}
 
 {% block content %}
-  <h2>Registration</h2>
-  <form method="POST">
+    <script>
+        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+    </script>
+    <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div class="login-box">
+  <h2>Register</h2>
+    <div class="user-box">
+     <input type="text" name="username" placeholder="Username" required data-bs-toggle="tooltip" data-bs-placement="top" title="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.">
+      <label>Username</label>
+    {% if form.username.errors %}
+      <span class="error">{{ form.username.errors }}</span>
+    {% endif %}
+    </div>
+    <div class="user-box">
+    <input type="password" name="password1" placeholder="Password" required data-bs-toggle="tooltip" data-bs-placement="right" title="Your password must contain at least 8 characters.">
+      <label>Password</label>
+    {% if form.password1.errors %}
+      <span class="error">{{ form.password1.errors }}</span>
+    {% endif %}
+    </div>
+    <div class="user-box">
+    <input type="password" name="password2" placeholder="Confirm Password" required data-bs-toggle="tooltip" data-bs-placement="right" title="Confirm Your Password Please">
+      <label>Confirm Password</label>
+    {% if form.password2.errors %}
+      <span class="error">{{ form.password2.errors }}</span>
+    {% endif %}
+    </div>
+
     <button type="submit">Register</button>
+        <h5>If you have an account</h5>
+        <a type="button" class="button_second" aria-current="page" href="{% url 'login' %}">Login</a>
+
+    </div>
   </form>
 {% endblock %}

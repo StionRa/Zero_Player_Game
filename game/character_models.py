@@ -1,6 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
-import random
+from django.utils import timezone
+
+from game.finder.find_exit_point import find_exit_point
+from game.models.town_model import City
+
 
 class Character(models.Model):
     GENDER_CHOICES = (
@@ -12,7 +16,37 @@ class Character(models.Model):
         ('Human', 'Human'),
         ('Elf', 'Elf'),
         ('Dwarf', 'Dwarf'),
+        ('Orc', 'Orc'),
+        ('Goblin', 'Goblin'),
+        ('Zombie', 'Zombie'),
+        ('Skeleton', "Skeleton"),
+        ('Centaur', 'Centaur'),
+        ('Gryphon', 'Gryphon'),
+        ('Nymph', 'Nymph'),
+        ('Vampire', 'Vampire'),
+        ('Gul', 'Gul'),
+        ('Cyborg', 'Cyborg'),
+        ('Robot', 'Robot'),
+        ('Mutant', 'Mutant'),
+        ('Cyborg Elf', 'Cyborg Elf'),
+        ('Goblin Geneticist', 'Goblin Geneticist'),
+        ('Orc Mechanic', 'Orc Mechanic'),
+        ('Humanoids', 'Humanoids'),
+
         # Add more race choices as needed
+    )
+
+    FIRST_PROFESSION = (
+        ('Warrior', 'Warrior'),
+        ('The Magician', 'The Magician'),
+        ('Scout', 'Scout'),
+        ('Engineer', 'Engineer'),
+        ('Healer', 'Healer'),
+        ('Merchant', 'Merchant'),
+        ('Artisan', 'Artisan'),
+        ('Traveller', 'Traveller'),
+        ('Researcher', 'Researcher')
+
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -21,6 +55,7 @@ class Character(models.Model):
     experience = models.IntegerField(default=0)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     race = models.CharField(max_length=255, choices=RACE_CHOICES)
+    profession = models.CharField(max_length=255, choices=FIRST_PROFESSION, default='Warrior')
     health_max = models.IntegerField(default=100)
     mana_max = models.IntegerField(default=100)
     mana = models.IntegerField(default=100)
@@ -40,7 +75,92 @@ class Character(models.Model):
     accuracy = models.IntegerField(default=10)
     x = models.IntegerField(default=0)
     y = models.IntegerField(default=0)
+    is_quest_completed = models.BooleanField(default=True)
+    have_quest = models.BooleanField(default=False)
+    last_regeneration = models.DateTimeField(default=timezone.now)
+    pvp_battle = models.IntegerField(default=0)
+    mob_battle = models.IntegerField(default=0)
+
+    base_experience = 100  # Базовое количество опыта для первого уровня
+    level_multiplier = 1.5  # Множитель уровня для экспоненциального повышения опыта
+    regeneration_interval = 10
+
+    def receive_quest(self, quest):
+        self.quest = quest
+        self.is_quest_completed = False
+        self.save()
+
+    def complete_quest(self):
+        if self.quest:
+            experience_reward = self.quest.experience_reward
+            self.experience += experience_reward
+            self.quest.complete_quest(self)
+            self.quest = None
+            self.is_quest_completed = True
+            self.save()
 
     def attack(self, target):
         damage = self.strength * 3 - target.defense * 0.2
         target.health -= int(damage)
+        self.save()
+
+    def check_level_up(self):
+        required_experience = self.base_experience * (self.level_multiplier ** self.level)
+        while self.experience >= required_experience:
+            self.level += 1
+            self.experience = 0
+            self.increase_attributes()
+            required_experience = self.base_experience * (self.level_multiplier ** self.level)
+        self.save()
+
+    def increase_attributes(self):
+        attribute_increase = self.level * 2  # Define the attribute increase formula as needed
+        self.strength += attribute_increase
+        self.dexterity += attribute_increase
+        self.defense += attribute_increase
+        self.intelligence += attribute_increase
+        self.energy += attribute_increase
+        self.speed += attribute_increase
+        self.charisma += attribute_increase
+        self.regeneration += attribute_increase
+        self.intuition += attribute_increase
+        self.luck += attribute_increase
+        self.accuracy += attribute_increase
+
+    def regenerate(self):
+        current_time = timezone.now()
+        time_difference = current_time - self.last_regeneration
+        seconds_passed = time_difference.total_seconds()
+        if seconds_passed >= self.regeneration_interval:
+            regeneration_percentage = self.regeneration
+            health_increase = int(self.health_max * (regeneration_percentage / 100))
+            self.health = min(self.health + health_increase, self.health_max)
+            self.last_regeneration = current_time
+            self.save()
+
+    def is_in_city(self):
+        city = City.objects.filter(x_coordinate=self.x, y_coordinate=self.y).first()
+        return city is not None
+
+    def should_go_on_quest(self):
+        # Здесь вы можете определить условие, при котором персонаж должен идти выполнить квест
+        # Например, если у персонажа есть активный квест, он должен выйти из города
+        if self.have_quest is True:
+            return True
+        else:
+            return False
+
+    def leave_city(self):
+        # Переместить персонажа из города
+        city = City.objects.filter(x_coordinate=self.x, y_coordinate=self.y).first()
+        if city:
+            exit_point = find_exit_point(city)
+            if exit_point:
+                self.x = exit_point[0]
+                self.y = exit_point[1]
+                self.save()
+                print(f"Character {self.name} left the city. Coordinates: ({self.x}, {self.y})")
+            else:
+                print("Exit point from the city not found.")
+        else:
+            print("Character is not in the city.")

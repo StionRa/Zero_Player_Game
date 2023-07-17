@@ -16,7 +16,7 @@
         xhr.send();
     }
 
-    setInterval(updateMapFragment, 5000);  // Обновление каждые 5 секунд (5000 миллисекунд)
+    setInterval(updateMapFragment, 1000);  // Обновление каждые 30 секунд (30000 миллисекунд)
 </script>
     <script>
     function updateInfoLine() {
@@ -31,24 +31,53 @@
         xhr.send();
     }
 
-    setInterval(updateInfoLine, 5000);  // Обновление каждые 5 секунд (5000 миллисекунд)
+    setInterval(updateInfoLine, 10000);  // Обновление каждые 30 секунд (30000 миллисекунд)
 </script>
+    <script>
+    function updateInfoLine() {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                const info_line = document.getElementById('character_param');
+                info_line.innerHTML = xhr.responseText;
+            }
+        };
+        xhr.open('GET', '{% url "character_param" %}', true);
+        xhr.send();
+    }
 
-    <h1>Личный кабинет пользователя</h1>
+    setInterval(updateInfoLine, 10000);  // Обновление каждые 30 секунд 30000 миллисекунд)
+</script>
+    <div class="container">
+<div class="row g-2 row-cols-1 row-cols-sm-2 row-cols-md-4">
+    <div class="col-sm-6 col-md-3">
+    <div class="card">
+    <div class="card-body border-secondary">
+            <div id="map-fragment">{% include 'game/map_fragment.html' %}</div>
+    </div>
+    </div>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div id="info-line">{% include 'game/info_line.html' %}</div>
+            </div>
+        </div>
+    </div>
 
-    {% if has_character %}
+    <div class="col-sm-6 col-md-3">
+    <div class="card">
+    <div class="card-body">
+        <div id="info-line">{% include 'game/character_param.html' %}</div>
+    </div>
+    </div>
+    </div>
+</div>
 
 
-        {% include 'game/map_fragment.html' %}
-        {% include 'game/info_line.html' %}
+        {% if error_message %}
+            <p class="alert alert-danger mt-3">{{ error_message }}</p>
+        {% endif %}
+</div>
 
-
-    {% else %}
-        <p>Create a character to start playing the game!</p>
-        <a href="{% url 'create_character' %}">Create Character</a>
-    {% endif %}
-
-    {% if error_message %}
-        <p>{{ error_message }}</p>
-    {% endif %}
 {% endblock %}

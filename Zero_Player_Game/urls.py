@@ -17,13 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from game.views import index_view, game_info_view, game_index_view, register, user_login, \
-    logout_view, game, map_fragment, info_line
+    logout_view, game, map_fragment, info_line, news_detail, character_param
 from game.create_character_utils import create_character
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Путь к главной странице (index)
     path('', index_view, name='index'),
+    path('news/<int:news_id>/', news_detail, name='news_detail'),
 
     # Путь к странице информации об игре (game_info)
     path('game_info/', game_info_view, name='game_info'),
@@ -41,4 +42,5 @@ urlpatterns = [
     path('game/', game, name='game'),
     path('map_fragment/', map_fragment, name='map_fragment'),
     path('info_line/', info_line, name='info_line'),
+    path('character_param/', character_param, name='character_param'),
 ]

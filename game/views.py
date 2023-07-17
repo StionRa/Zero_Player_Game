@@ -1,22 +1,34 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from game.actionlog_model import ActionLog
-from .character_models import Character
-from .map_generator import load_map
-from .print_map import print_map
-from game.tasks import update_character_state
-from game.utils import start_game
+from game.character_models import Character
+from game.location_model.get_color_temp import get_color_temp
+from game.location_model.map_generator import load_map
+from game.location_model.print_map import print_map
+from game.news.news_model import News, Category
 
 
 def index_view(request):
-    return render(request, 'game/index.html')
+    category = Category.objects.get(name='Game development')
+    news = News.objects.filter(category=category)[:3]  # Получаем только 3 новости для данной категории
+    context = {'category': category, 'news': news}
+    return render(request, 'game/index.html', context)
+
+
+def news_detail(request, news_id):
+    news = get_object_or_404(News, id=news_id)
+    context = {'news': news}
+    return render(request, 'game/news_detail.html', context)
 
 
 def game_info_view(request):
-    return render(request, 'game/game_info.html')
+    category = Category.objects.get(name='Information')
+    news = News.objects.filter(category=category)
+    context = {'category': category, 'news': news}
+    return render(request, 'game/game_info.html', context)
 
 
 def user_login(request):
@@ -49,10 +61,17 @@ def register(request):
 
 
 @login_required
+def create_character(request):
+    user = request.user
+    return render(request, 'game/create_character.html', {'user': user})
+
+
+@login_required
 def game_index_view(request):
     user = request.user
     has_character = Character.objects.filter(user=user).exists()
-    update_character_state.delay()
+    if not has_character:
+        return redirect('create_character')
     return render(request, 'game/game_index.html',
                   {'has_character': has_character})
 
@@ -72,15 +91,33 @@ def map_fragment(request):
     character = Character.objects.get(user=user)
     x = character.x
     y = character.y
-    map_data = load_map()
-    map_html = print_map(map_data, x, y)
-    conti = {'character': character, "map_data": map_data, "map_html": map_html}
+    map_data, temperature_map, river_map, lake_map = load_map()
+    map_html = print_map(map_data, temperature_map, river_map, lake_map, x, y)
+    temp = temperature_map[y][x]
+    temp_color = get_color_temp(temp)
+
+    conti = {'character': character, "map_data": map_data, 'temperature_map': temperature_map, 'temp': temp, 'river_map': river_map,
+             'lake_map': lake_map, "map_html": map_html, 'temp_color': temp_color}
     return render(request, 'game/map_fragment.html', conti)
 
 
+@login_required
 def info_line(request):
     user = request.user
     character = Character.objects.get(user=user)
-    start_game()
     action_logs = ActionLog.objects.filter(character=character).order_by('-timestamp')[:10]
-    return render(request, 'game/info_line.html', {'action_logs': action_logs})
+    context = {
+        'character': character,
+        'action_logs': action_logs
+    }
+    return render(request, 'game/info_line.html', context)
+
+
+@login_required
+def character_param(request):
+    user = request.user
+    character = Character.objects.get(user=user)
+    context = {
+        'character': character
+    }
+    return render(request, 'game/character_param.html', context)

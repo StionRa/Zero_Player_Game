@@ -1,4 +1,22 @@
 <!-- map_fragment.html -->
-<div class="map" id="map-fragment">
-    {{ map_html|safe }}
+<div class="container">
+
+    <div class="row justify-content-md-center">
+        <div class="col">
+        <div class="map mx-auto" id="map-fragment" style="width: 150px;">
+            {{ map_html|safe }}
+        </div>
+            </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col">Температура:
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped {{ temp_color }}" role="progressbar" style="width: {{ temp }}%" aria-valuenow="{{ temp }}" aria-valuemin="-20" aria-valuemax="35"></div>
+        {{ temp }}
+        </div>
+
+        </div>
+    </div>
+
 </div>

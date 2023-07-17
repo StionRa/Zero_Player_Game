@@ -1,4 +1,8 @@
+import random
+
 from django.db import models
+
+from game.character_models import Character
 
 
 class Animal(models.Model):
@@ -16,6 +20,10 @@ class Animal(models.Model):
     speed = models.IntegerField(default=10)
     regeneration = models.IntegerField(default=10)
     defense = models.IntegerField(default=10)
+    experience = models.IntegerField(default=10)
+    money = random.randint(1, 100)
+    is_active = models.BooleanField(default=True)
+    quest_character = models.ForeignKey(Character, on_delete=models.CASCADE, null=True, blank=True)
 
     def speak(self):
         pass
@@ -26,6 +34,8 @@ class Animal(models.Model):
     def attack(self, target):
         damage = self.strength * 3 - target.defense * 0.2
         target.health -= int(damage)
+        self.save()
+        target.save()
 
 
 class Dog(Animal):

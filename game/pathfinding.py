@@ -1,4 +1,4 @@
-from game.location_model import Location
+from game.location_model.location_model import Location
 from django.db import models
 import heapq
 

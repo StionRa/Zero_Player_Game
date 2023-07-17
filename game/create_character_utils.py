@@ -14,12 +14,14 @@ def create_character(request):
         name = request.POST['name']
         gender = request.POST['gender']
         race = request.POST['race']
+        profession = request.POST['profession']
 
         # Создание экземпляра персонажа
         character = Character.objects.create(user=request.user,
                                              name=name,
                                              gender=gender,
                                              race=race,
+                                             profession=profession,
                                              health_max=100,
                                              mana_max=20,
                                              mana=20,
