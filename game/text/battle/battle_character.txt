@@ -1,20 +1,20 @@
-{name} атаковал {animal}. Здоровье {animal}: {animal_health}
-{name} с ловкостью прыгнул верхом на спину {animal}. Здоровье {animal}: {animal_health}
-{name} дерзко упал перед {animal}, напугав его. Здоровье {animal}: {animal_health}
-{name} заикнулся на честь {animal}. Здоровье {animal}: {animal_health}
-{name} подмигнул глазом {animal}. Здоровье {animal}: {animal_health}
-{name} атаковал {animal}. Здоровье {animal}: {animal_health}
-{name} нанес удар по {animal}. Здоровье {animal}: {animal_health}
-{name} с силой ударил {animal}. Здоровье {animal}: {animal_health}
-{name} крепко атаковал {animal}. Здоровье {animal}: {animal_health}
-{name} с ловкостью атаковал {animal}. Здоровье {animal}: {animal_health}
-{name} прыгнул верхом на спину {animal}. Здоровье {animal}: {animal_health}
-{name} смело вскочил на спину {animal}. Здоровье {animal}: {animal_health}
-{name} решил сразить {animal} издалека. Здоровье {animal}: {animal_health}
-{name} дерзко упал, напугав {animal}. Здоровье {animal}: {animal_health}
-{name} решил испугать {animal}. Здоровье {animal}: {animal_health}
-{name} заикнулся на честь {animal}. Здоровье {animal}: {animal_health}
-{name} намекнул на силу {animal}. Здоровье {animal}: {animal_health}
-{name} подмигнул глазом {animal}. Здоровье {animal}: {animal_health}
-{name} проявил мастерство в атаке {animal}. Здоровье {animal}: {animal_health}
-{name} решил проверить свои силы на {animal}. Здоровье {animal}: {animal_health}
+{name} attacked {animal}. animal health: {animal_health}
+{name} jumped on {animal} back on horseback with agility. animal health: {animal_health}
+{name} boldly fell in front of {animal}, startling him. animal health: {animal_health}
+{name} stammered on {animal} honor. animal health: {animal_health}
+{name} winked an eye at {animal}. animal health: {animal_health}
+{name} attacked {animal}. animal health: {animal_health}
+{name} dealt a blow to {animal}. animal health: {animal_health}
+{name} struck {animal} with force. animal health: {animal_health}
+{name} attacked {animal} with strength. animal health: {animal_health}
+{name} attacked {animal} with agility. animal health: {animal_health}
+{name} jumped on {animal} back on horseback. animal health: {animal_health}
+{name} boldly jumped up on {animal} back. animal health: {animal_health}
+{name} decided to slay {animal} from afar. animal health: {animal_health}
+{name} boldly fell down, scaring {animal}. animal health: {animal_health}
+{name} decided to scare {animal}. animal health: {animal_health}
+{name} stammered on {animal} honor. animal health: {animal_health}
+{name} hinted at {animal} strength. animal health: {animal_health}
+{name} gave {animal} a wink of the eye. animal health: {animal_health}
+{name} showed skill in attacking {animal}. animal health: {animal_health}
+{name} decided to test his strength on {animal}. animal health: {animal_health}

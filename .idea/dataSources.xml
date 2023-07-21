@@ -8,7 +8,7 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="Django default" uuid="0cb4bc0d-9563-4932-b3ea-1d5b150c9ad5">
+    <data-source source="LOCAL" name="Django default" uuid="4d57d1ce-5326-4c21-8f52-d268697de6b6">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>

@@ -1,10 +1,10 @@
-{name} не смог справиться с {animal} и потерпел поражение в битве.
-{name} был побежден в схватке с {animal}.
-Сопротивление {name} оказалось недостаточным перед силой и агрессией {animal}, и он проиграл в битве.
-{animal} оказался сильнее {name} и одержал победу в схватке.
-Попытки {name} защититься не увенчались успехом, и он потерпел поражение от {animal}.
-В битве {name} оказался менее опытным и смог быть побежденным {animal}.
-{name} не смог противостоять силе и атакам {animal} и проиграл в битве.
-После ожесточенной схватки {animal} одержал победу над {name} и покинул его поверженным.
-Силы {animal} оказались слишком мощными для {name}, и он потерпел поражение в битве.
-Благодаря своей силе и хитрости, {animal} сумел победить {name} в схватке.
+{name} was unable to handle {animal} and was defeated in battle.
+{name} was defeated in the battle with {animal}.
+{name} resistance proved insufficient in the face of {animal} strength and aggression, and he lost the battle.
+{animal} proved stronger than {name} and won the bout.
+{name} attempts to defend himself failed, and he was defeated by {animal}.
+In the battle, {name} proved to be less skilled and was able to be defeated by {animal}.
+{name} was unable to withstand {animal} strength and attacks and lost the battle.
+After a fierce battle, {animal} defeated {name} and left him defeated.
+{animal} forces proved too powerful for {name} and he was defeated in the battle.
+Thanks to his strength and cunning, {animal} was able to defeat {name} in the battle.

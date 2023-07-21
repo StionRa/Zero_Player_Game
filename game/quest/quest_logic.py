@@ -1,4 +1,4 @@
-from game.animal_model import Animal
+from game.animal.animal_model import Animal
 from game.battle.animal_battle import battle_with_animal
 from game.finder.animal_find import find_nearest_animal
 from game.models.back_to_city import back_to_city
@@ -21,12 +21,13 @@ def make_quest_decision(character):
                     handle_quest_error(character, quest)
                     print('error')
                 else:
+                    nearest_animal = Animal.objects.filter(x=target_x, y=target_y).first()
+                    nearest_animal.is_active = False
+                    nearest_animal.quest_character = character
+                    nearest_animal.save()
                     repeat_move(character, target_x, target_y)
                     print('repeat move to target', target_x, target_y)
-                    nearest_animal = Animal.objects.filter(x=target_x, y=target_y, is_active=True).first()
                     if nearest_animal:
-                        nearest_animal.quest_character = character
-                        nearest_animal.save()
                         if quest.objective_progress < quest.objective_quantity:
                             if nearest_animal is None:
                                 # No animal found at the specified location

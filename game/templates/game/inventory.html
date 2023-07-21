@@ -1,0 +1,16 @@
+<!-- inventory.html -->
+
+
+<h5>{{ character.name }} Inventory</h5>
+{% for item in inventory_items %}
+  <div class="badge bg-success text-wrap" style="width: 6rem;">
+      <a href="#" class="link-warning link-underline-opacity-25 link-underline-opacity-100-hover">{{ item.item.category }}</a>
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 6rem;">
+    <a href="#" class="link-warning link-underline-opacity-25 link-underline-opacity-100-hover">{{ item.item.name }}</a>
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 4rem;">
+    {{ item.quantity }}
+  </div>
+
+{% endfor %}

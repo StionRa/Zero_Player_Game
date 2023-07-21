@@ -1,48 +1,87 @@
 <!-- character_param.html -->
 <div class="character_param" id="character_param">
-    <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-                <span class="nav-link">Name: {{ character.name }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Level: {{ character.level }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Exp: {{ character.experience }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Health: {{ character.health }}/{{ character.health_max }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Mana: {{ character.mana }}/{{ character.mana_max }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Stamina: {{ character.stamina }}/{{ character.stamina_max }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Str: {{ character.strength }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Dex: {{ character.dexterity }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Def: {{ character.defense }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Int: {{ character.intelligence }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">coord: {{ character.x }}, {{ character.y }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Quest: {{ user.character.is_quest_completed }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Energy: {{ user.character.energy }}</span>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link">Speed: {{ user.character.speed }}</span>
-            </li>
-            <!-- Add more character attributes as needed -->
-        </ul>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Name:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    <a href="#" class="link-warning link-underline-opacity-25 link-underline-opacity-100-hover">{{ character.name }}</a>
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Level:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.level }}
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Exp:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.experience }}
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Health:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.health }}/{{ character.health_max }}
+  </div>
+        <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Mana:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.mana }}/{{ character.mana_max }}
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Stamina:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.stamina }}/{{ character.stamina_max }}
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Str:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.strength }}
+  </div>
+        <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Dex:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.dexterity }}
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Def:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.defense }}
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Int:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.intelligence }}
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Spd:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.speed }}
+  </div>
+        <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Energy:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.energy }}
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Quest:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.is_quest_completed }}/{{ character.have_quest }}
+  </div>
+    <div class="badge bg-dark text-wrap" style="width: 5rem;">
+      Coord:
+  </div>
+  <div class="badge bg-success text-wrap" style="width: 9rem;">
+    {{ character.x }}, {{ character.y }}
+  </div>
 </div>

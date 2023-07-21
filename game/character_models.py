@@ -78,6 +78,7 @@ class Character(models.Model):
     is_quest_completed = models.BooleanField(default=True)
     have_quest = models.BooleanField(default=False)
     last_regeneration = models.DateTimeField(default=timezone.now)
+    last_regeneration_stamina = models.DateTimeField(default=timezone.now)
     pvp_battle = models.IntegerField(default=0)
     mob_battle = models.IntegerField(default=0)
 
@@ -85,32 +86,19 @@ class Character(models.Model):
     level_multiplier = 1.5  # Множитель уровня для экспоненциального повышения опыта
     regeneration_interval = 10
 
-    def receive_quest(self, quest):
-        self.quest = quest
-        self.is_quest_completed = False
-        self.save()
-
-    def complete_quest(self):
-        if self.quest:
-            experience_reward = self.quest.experience_reward
-            self.experience += experience_reward
-            self.quest.complete_quest(self)
-            self.quest = None
-            self.is_quest_completed = True
-            self.save()
-
     def attack(self, target):
         damage = self.strength * 3 - target.defense * 0.2
         target.health -= int(damage)
         self.save()
+        target.save()
 
     def check_level_up(self):
-        required_experience = self.base_experience * (self.level_multiplier ** self.level)
-        while self.experience >= required_experience:
+        self.required_experience = self.base_experience * (self.level_multiplier ** self.level)
+        while self.experience >= self.required_experience:
             self.level += 1
             self.experience = 0
             self.increase_attributes()
-            required_experience = self.base_experience * (self.level_multiplier ** self.level)
+            self.required_experience = self.base_experience * (self.level_multiplier ** self.level)
         self.save()
 
     def increase_attributes(self):
@@ -128,27 +116,15 @@ class Character(models.Model):
         self.accuracy += attribute_increase
 
     def regenerate(self):
-        current_time = timezone.now()
-        time_difference = current_time - self.last_regeneration
-        seconds_passed = time_difference.total_seconds()
-        if seconds_passed >= self.regeneration_interval:
-            regeneration_percentage = self.regeneration
-            health_increase = int(self.health_max * (regeneration_percentage / 100))
-            self.health = min(self.health + health_increase, self.health_max)
-            self.last_regeneration = current_time
+        if self.health == self.health_max:
+            return
+        else:
+            self.health += ((self.health_max - self.health) / self.regeneration) + self.level
             self.save()
 
     def is_in_city(self):
         city = City.objects.filter(x_coordinate=self.x, y_coordinate=self.y).first()
         return city is not None
-
-    def should_go_on_quest(self):
-        # Здесь вы можете определить условие, при котором персонаж должен идти выполнить квест
-        # Например, если у персонажа есть активный квест, он должен выйти из города
-        if self.have_quest is True:
-            return True
-        else:
-            return False
 
     def leave_city(self):
         # Переместить персонажа из города
@@ -156,11 +132,22 @@ class Character(models.Model):
         if city:
             exit_point = find_exit_point(city)
             if exit_point:
-                self.x = exit_point[0]
-                self.y = exit_point[1]
+                self.x, self.y = exit_point
                 self.save()
                 print(f"Character {self.name} left the city. Coordinates: ({self.x}, {self.y})")
             else:
                 print("Exit point from the city not found.")
         else:
             print("Character is not in the city.")
+
+    def sleep(self):
+        if self.stamina == self.stamina_max:
+            print(f"{self.name} doesn't need to sleep. Stamina is already full.")
+            return
+        elif self.stamina <= 0:
+            self.stamina += (((self.stamina_max - self.stamina) / self.regeneration) * self.level)
+            print(f"{self.name} slept. Stamina: {self.stamina}/{self.stamina_max}")
+        else:
+            print(f"{self.name} doesn't need to sleep. Stamina is already full.")
+
+

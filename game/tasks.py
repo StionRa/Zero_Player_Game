@@ -13,7 +13,8 @@ def update_character_state():
 
 @shared_task
 def process_character_utils(character_id):
+    new_animal_generator()
     character_proc = Character.objects.get(id=character_id)
     make_decision_what_to_do(character_proc)
-    new_animal_generator()
+
 

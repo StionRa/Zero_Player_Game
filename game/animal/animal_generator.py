@@ -1,10 +1,10 @@
 from random import choice
 import random
-from game.animal_model import Dog, Cat
+from game.animal.animal_model import Dog, Cat
 from game.location_model.map_generator import load_map
 from game.location_model.location_model import Location
 from django.db import models
-from game.animal_model import Animal
+from game.animal.animal_model import Animal
 
 
 def calculate_grid_count(map_data):
@@ -26,8 +26,10 @@ generated_animals = []
 def generate_animals():
     # Создаем список имен животных
     global generated_animals
-    dog_names = ["Buddy", "Max", "Charlie", "Cooper", "Rocky"]
-    cat_names = ["Oliver", "Leo", "Milo", "Simba", "Tiger"]
+    dog_names = ["Buddy", "Max", "Charlie", "Cooper", "Rocky", "Bailey", "Daisy", "Duke", "Bella", "Luna", "Zeus",
+                 "Ruby", "Jack", "Molly", "Winston", "Abby", "Toby", "Sadie", "Oscar", "Rosie"]
+    cat_names = ["Leo", "Milo", "Simba", "Tiger", "Whiskers", "Chloe", "Jasper", "Willow", "Oliver", "Cleo",
+                 "Gizmo", "Nala", "Felix", "Luna", "Muffin", "Simba", "Misty"]
 
     # Получаем карту
     map_data, _, _, _ = load_map()
@@ -86,3 +88,4 @@ def generate_animals():
                 Animal.objects.bulk_create(generated_animals)
 
             return generated_animals if generated_animals else None
+

@@ -1,15 +1,15 @@
-{animal} атаковало {name}. Здоровье {name}: {character_health}
-{animal} нанесло удар по {name}. Здоровье {name}: {character_health}
-{animal} с силой атаковало {name}. Здоровье {name}: {character_health}
-{animal} бросило вызов {name}. Здоровье {name}: {character_health}
-{animal} перепрыгнуло либидо {name}. Здоровье {name}: {character_health}
-{animal} смело прыгнуло на {name}. Здоровье {name}: {character_health}
-{animal} ударило в удар {name}. Здоровье {name}: {character_health}
-{animal} неожиданно атаковало {name}. Здоровье {name}: {character_health}
-{animal} заставило выговаривать {name} - Кувырок с преподвыподвертом! Здоровье {name}: {character_health}
-{animal} фуркнув, пришило яйца {name}. Здоровье {name}: {character_health}
-{animal} нагадило пафосно в тапочки {name}. Здоровье {name}: {character_health}
-{animal} отразило атаку {name}. Здоровье {name}: {character_health}
-{animal} проявило свою ярость на {name}. Здоровье {name}: {character_health}
-{animal} разорвало {name} своими когтями. Здоровье {name}: {character_health}
-{animal} ударило смертельным ударом по {name}. Здоровье {name}: {character_health}
+{animal} attacked {name}. {name} health: {character_health}
+{animal} has struck {name}. {name} health: {character_health}
+{animal} attacked {name} with force. {name} health: {character_health}
+{animal} has challenged {name}. {name} health: {character_health}
+{animal} has jumped {name} libido. {name} health: {character_health}
+{animal} has boldly jumped {name}. {name} health: {character_health}
+{animal} struck a blow at {name}. {name} health: {character_health}
+{animal} unexpectedly attacked {name}. {name} health: {character_health}
+{animal} made {name} say - Tumble with a pre-subvert! {name} health: {character_health}
+{animal} furtively sewed {name} balls back on. {name} health: {character_health}
+{animal} has pooped in {name} slippers. {name} health: {character_health}
+{animal} has repelled {name} attack. {name} health: {character_health}
+{animal} has unleashed its fury on {name}. {name} health: {character_health}
+{animal} tore {name} apart with its claws. {name} health: {character_health}
+{animal} struck {name} with a deadly blow. {name} health: {character_health}

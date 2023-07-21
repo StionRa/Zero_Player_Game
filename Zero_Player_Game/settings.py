@@ -139,5 +139,5 @@ CELERY_BROKER_URL = 'redis://localhost:6379/0'  # URL брокера сообщ�
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # URL бэкенда результатов, также может быть Redis
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 # set the celery timezone
-CELERY_TIMEZONE = 'UTC'
+CELERY_TIMEZONE = 'Europe/Warsaw'
 

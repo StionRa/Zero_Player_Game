@@ -2,6 +2,7 @@ import random
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .character_models import Character
+from .inventory.inventory_model import Inventory
 
 
 @login_required
@@ -39,9 +40,18 @@ def create_character(request):
                                              intuition=random.randint(1, 10),
                                              luck=random.randint(1, 10),
                                              accuracy=random.randint(1, 10))
-
+        get_or_create_inventory(character)
         character.save()
 
         return redirect('game_index')  # Перенаправление на страницу кабинета пользователя
 
     return render(request, 'game/create_character.html')
+
+
+def get_or_create_inventory(character):
+    try:
+        return character.inventory.create_inventory()
+    except Inventory.DoesNotExist:
+        # If AnimalInventory does not exist, create one
+        character_inventory = Inventory.objects.create(character=character)
+        return character_inventory

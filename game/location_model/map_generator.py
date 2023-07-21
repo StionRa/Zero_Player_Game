@@ -97,9 +97,9 @@ def load_map():
         height_y = max(max(y_values) + 1, height)
 
         map_load = [[True for _ in range(width_x)] for _ in range(height_y)]
-        temperature_map = [[20.00 for _ in range(width_x)] for _ in range(height_y)]
-        river_map = [[False for _ in range(width_x)] for _ in range(height_y)]
-        lake_map = [[False for _ in range(width_x)] for _ in range(height_y)]
+        temperature_map = [[True for _ in range(width_x)] for _ in range(height_y)]
+        river_map = [[True for _ in range(width_x)] for _ in range(height_y)]
+        lake_map = [[True for _ in range(width_x)] for _ in range(height_y)]
 
         for x, y, passable, temperature, river, lake in zip(x_values, y_values, passables, temperatures, rivers, lakes):
             map_load[y][x] = passable

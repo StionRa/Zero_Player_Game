@@ -1,4 +1,4 @@
-from game.animal_generator import generate_animals
+from game.animal.animal_generator import generate_animals
 
 
 def new_animal_generator():

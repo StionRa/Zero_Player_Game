@@ -4,8 +4,8 @@ from game.character_models import Character
 
 class Quest(models.Model):
     model_task = (
-        ('k', 'kill_animal'),
-        ('f', 'find'),
+        ('kill_animal', 'kill_animal'),
+        ('find', 'find'),
     )
     character = models.ForeignKey(Character, on_delete=models.CASCADE, related_name='quests')
     name = models.CharField(max_length=255)
@@ -21,3 +21,5 @@ class Quest(models.Model):
 
         # Additional logic for quest completion, if needed
         # You can update other game objects or perform specific actions here
+
+

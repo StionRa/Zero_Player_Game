@@ -1,8 +1,8 @@
-from game.animal_model import Animal
+from game.animal.animal_model import Animal
 
 
 def find_nearest_animal(character):
-    animals = Animal.objects.filter(is_active=True)
+    animals = Animal.objects.filter(is_active=True, quest_character=None)
     print('get animals from DB')
     if animals:
         nearest_animal = min(animals, key=lambda animal: abs(animal.x - character.x) + abs(animal.y - character.y))

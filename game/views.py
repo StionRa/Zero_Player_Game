@@ -5,15 +5,22 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from game.actionlog_model import ActionLog
 from game.character_models import Character
+from game.inventory.inventory_model import Inventory, InventoryItem
 from game.location_model.get_color_temp import get_color_temp
 from game.location_model.map_generator import load_map
 from game.location_model.print_map import print_map
 from game.news.news_model import News, Category
+from game.game_options import MIN_TEMPERATURE, MAX_TEMPERATURE
+from decimal import Decimal
+
+
+min_temperature = Decimal(str(MIN_TEMPERATURE))
+max_temperature = Decimal(str(MAX_TEMPERATURE))
 
 
 def index_view(request):
     category = Category.objects.get(name='Game development')
-    news = News.objects.filter(category=category)[:3]  # Получаем только 3 новости для данной категории
+    news = News.objects.filter(category=category)  # Получаем только 3 новости для данной категории
     context = {'category': category, 'news': news}
     return render(request, 'game/index.html', context)
 
@@ -92,12 +99,15 @@ def map_fragment(request):
     x = character.x
     y = character.y
     map_data, temperature_map, river_map, lake_map = load_map()
-    map_html = print_map(map_data, temperature_map, river_map, lake_map, x, y)
+    map_html = print_map(map_data, river_map, lake_map, x, y)
     temp = temperature_map[y][x]
     temp_color = get_color_temp(temp)
-
-    conti = {'character': character, "map_data": map_data, 'temperature_map': temperature_map, 'temp': temp, 'river_map': river_map,
-             'lake_map': lake_map, "map_html": map_html, 'temp_color': temp_color}
+    temperature_map[y][x] = temp_color
+    progress = float((temp - min_temperature) / (max_temperature - min_temperature)) * 100
+    conti = {'character': character, "map_data": map_data, 'temperature_map': temperature_map, 'temp': temp,
+             'river_map': river_map,
+             'lake_map': lake_map, "map_html": map_html, 'temp_color': temp_color,
+             "progress": progress}
     return render(request, 'game/map_fragment.html', conti)
 
 
@@ -121,3 +131,20 @@ def character_param(request):
         'character': character
     }
     return render(request, 'game/character_param.html', context)
+
+# views.py
+
+
+@login_required
+def view_inventory(request):
+    user = request.user
+    character = Character.objects.get(user=user)
+    inventory = Inventory.objects.get(character=character)
+    inventory_items = InventoryItem.objects.filter(inventory=inventory)
+
+    context = {
+        'character': character,
+        'inventory_items': inventory_items
+    }
+    return render(request, 'game/inventory.html', context)
+

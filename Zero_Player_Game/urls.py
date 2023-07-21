@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from game.views import index_view, game_info_view, game_index_view, register, user_login, \
-    logout_view, game, map_fragment, info_line, news_detail, character_param
+    logout_view, game, map_fragment, info_line, news_detail, character_param, view_inventory
 from game.create_character_utils import create_character
 
 urlpatterns = [
@@ -43,4 +43,5 @@ urlpatterns = [
     path('map_fragment/', map_fragment, name='map_fragment'),
     path('info_line/', info_line, name='info_line'),
     path('character_param/', character_param, name='character_param'),
+    path('inventory/', view_inventory, name='inventory'),
 ]

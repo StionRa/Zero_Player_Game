@@ -7,13 +7,13 @@
     <div>
        <header>Merging Realities News</header>
     </div>
-    <div class="subhead">Avantgrad, - Thursday August 30, 1978 - Seven Pages</div>
+    <div class="subhead">Edenburg, - Friday July 21, 2023 - The Daylight Alliance</div>
 </div>
 
 
 
 <div class="row row-cols-1 row-cols-md-2 g-4 m-1">
-{% for news_item in news %}
+{% for news_item in news|dictsortreversed:"created_at" %}
 <div class="col">
 
                 <div class="card border-secondary h-100">
@@ -30,12 +30,12 @@
                         <h5 class="card-title">{{ news_item.title }}</h5>
                         <p class="card-text">
                             {% if news_item.text|length > 300 %}
-                                {{ news_item.text|slice:":300" }} >> <a href="{% url 'news_detail' news_id=news_item.id %}">Подробнее</a>
+                                {{ news_item.text|slice:":300" }} >> <a href="{% url 'news_detail' news_id=news_item.id %}">More</a>
                             {% else %}
                                 {{ news_item.text }}
                             {% endif %}
                         </p>
-                        <a href="{% url 'news_detail' news_id=news_item.id %}" class="card-link">Читать полностью</a>
+                        <a href="{% url 'news_detail' news_id=news_item.id %}" class="card-link">Read all</a>
                     </div>
                     <div class="card-footer text-muted">
                         {{ news_item.created_at }}

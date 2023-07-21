@@ -1,8 +1,13 @@
+import time
+
 from game.location_model.location_model import Location
 from game.actionlog_model import ActionLog
 from game.pathfinding import a_star_search
 from random import choice
-from time import sleep
+from game.game_options import SLEEP_TIME, CHARACTER_COST_STEP
+
+sleep_time = SLEEP_TIME
+step = CHARACTER_COST_STEP
 
 
 def move(character, target_x, target_y):
@@ -10,6 +15,7 @@ def move(character, target_x, target_y):
     if target_cell:
         character.x = target_x
         character.y = target_y
+        character.stamina = max(character.stamina - step, 0)
         character.save()
         action_description = choice(open('game/text/travel/travel.txt').readlines()).format(
             name=character.name,
@@ -18,7 +24,7 @@ def move(character, target_x, target_y):
         )
         ActionLog.objects.create(description=action_description, character=character)
         print(f"Character {character.name} moved to coordinates: ({target_x}, {target_y})")
-        sleep(5)
+        time.sleep(sleep_time)
     else:
         print(f"The cell at coordinates ({target_x}, {target_y}) is impassable or does not exist.")
 
