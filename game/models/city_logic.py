@@ -18,50 +18,36 @@ def enter_city(character):
         if character.health < character.health_max:
             character.regenerate()
             print(f"Character health regenerated. {character.health}/{character.health_max}")
-            time.sleep(sleep_time)
             return
         elif character.health == character.health_max:
-            if character.stamina < character.stamina_max/2:
-                # character.sleep(minutes=5)
-                print(
-                    f"Character stamina is not fully regenerated. Stamina: {character.stamina}/{character.stamina_max}")
-                time.sleep(sleep_time)
+            quest = Quest.objects.filter(character=character).first()
+            active_quest = Quest.objects.filter(character=character, completed=True).first()
+            unfinished_quest = Quest.objects.filter(character=character, completed=False).first()
+            if character.is_quest_completed and not character.have_quest and not quest:
+                # Если у персонажа нет квестов, выдается новый квест
+                new_quest(character)
                 return
-            elif character.stamina == character.stamina_max:
-                action_description = choice(open('game/text/city/enter_city.txt').readlines()).format(
-                    name=character.name,
-                    city=city.name,
-                    description=city.description
-                )
-                ActionLog.objects.create(description=action_description, character=character)
-                quest = Quest.objects.filter(character=character).first()
-                active_quest = Quest.objects.filter(character=character, completed=True).first()
-                unfinished_quest = Quest.objects.filter(character=character, completed=False).first()
-                if character.is_quest_completed and not character.have_quest and not quest:
-                    # Если у персонажа нет квестов, выдается новый квест
-                    new_quest(character)
+            elif not character.is_quest_completed and character.have_quest:
+                # Если у персонажа есть выполненный квест, вызывается функция completed_quest
+                if active_quest:
+                    completed_quest(active_quest, character)
                     return
-                elif not character.is_quest_completed and character.have_quest:
-                    # Если у персонажа есть выполненный квест, вызывается функция completed_quest
-                    if active_quest:
-                        completed_quest(active_quest, character)
-                        return
-                    elif unfinished_quest:
-                        # Если у персонажа есть невыполненный квест, вызывается функция leave_city
-                        action_description = f"{character.name} goes on an unfinished quest."
-                        ActionLog.objects.create(description=action_description, character=character)
-                        character.leave_city()
-                        return
-                    else:
-                        print("I don`t know what happiness")
-
+                elif unfinished_quest:
+                    # Если у персонажа есть невыполненный квест, вызывается функция leave_city
+                    action_description = f"{character.name} goes on an unfinished quest."
+                    ActionLog.objects.create(description=action_description, character=character)
+                    character.leave_city()
+                    return
                 else:
-                    print("No completed quests found for the character.")
+                    print("I don`t know what happiness")
 
             else:
-                print("Character health is not fully regenerated.")
+                print("No completed quests found for the character.")
+
         else:
-            print("No city found at the current location.")
+            print("Character health is not fully regenerated.")
+    else:
+        print("No city found at the current location.")
 
 
 def new_quest(character):

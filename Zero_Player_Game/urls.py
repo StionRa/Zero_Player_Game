@@ -19,6 +19,7 @@ from django.urls import path
 from game.views import index_view, game_info_view, game_index_view, register, user_login, \
     logout_view, game, map_fragment, info_line, news_detail, character_param, view_inventory
 from game.create_character_utils import create_character
+from faq.views import faq_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -44,4 +45,5 @@ urlpatterns = [
     path('info_line/', info_line, name='info_line'),
     path('character_param/', character_param, name='character_param'),
     path('inventory/', view_inventory, name='inventory'),
+    path('faq/', faq_view, name='faq')
 ]

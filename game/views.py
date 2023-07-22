@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
@@ -19,9 +21,10 @@ max_temperature = Decimal(str(MAX_TEMPERATURE))
 
 
 def index_view(request):
+    current_date = datetime.datetime.now()
     category = Category.objects.get(name='Game development')
-    news = News.objects.filter(category=category)  # Получаем только 3 новости для данной категории
-    context = {'category': category, 'news': news}
+    news = News.objects.filter(category=category)
+    context = {'category': category, 'news': news, "current_date": current_date}
     return render(request, 'game/index.html', context)
 
 

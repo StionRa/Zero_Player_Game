@@ -29,17 +29,17 @@ def create_character(request):
                                              stamina_max=100,
                                              stamina=100,
                                              health=100,
-                                             strength=random.randint(1, 10),
-                                             dexterity=random.randint(1, 10),
-                                             defense=random.randint(1, 10),
-                                             intelligence=random.randint(1, 10),
-                                             energy=random.randint(1, 10),
-                                             speed=random.randint(1, 10),
-                                             charisma=random.randint(1, 10),
-                                             regeneration=random.randint(1, 10),
-                                             intuition=random.randint(1, 10),
-                                             luck=random.randint(1, 10),
-                                             accuracy=random.randint(1, 10))
+                                             strength=random.randint(5, 10),
+                                             dexterity=random.randint(5, 10),
+                                             defense=random.randint(5, 10),
+                                             intelligence=random.randint(5, 10),
+                                             energy=random.randint(5, 10),
+                                             speed=random.randint(5, 10),
+                                             charisma=random.randint(5, 10),
+                                             regeneration=random.randint(5, 10),
+                                             intuition=random.randint(5, 10),
+                                             luck=random.randint(5, 10),
+                                             accuracy=random.randint(5, 10))
         get_or_create_inventory(character)
         character.save()
 

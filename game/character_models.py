@@ -142,12 +142,8 @@ class Character(models.Model):
 
     def sleep(self):
         if self.stamina == self.stamina_max:
-            print(f"{self.name} doesn't need to sleep. Stamina is already full.")
             return
-        elif self.stamina <= 0:
-            self.stamina += (((self.stamina_max - self.stamina) / self.regeneration) * self.level)
-            print(f"{self.name} slept. Stamina: {self.stamina}/{self.stamina_max}")
         else:
-            print(f"{self.name} doesn't need to sleep. Stamina is already full.")
+            self.stamina += (((self.stamina_max - self.stamina) / self.regeneration) * self.level)
 
 

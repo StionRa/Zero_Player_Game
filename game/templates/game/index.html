@@ -7,7 +7,7 @@
     <div>
        <header>Merging Realities News</header>
     </div>
-    <div class="subhead">Edenburg, - Friday July 21, 2023 - The Daylight Alliance</div>
+    <div class="subhead">Edenburg, - {{ current_date|date:"l F j, Y" }} - The Daylight Alliance</div>
 </div>
 
 
@@ -38,7 +38,7 @@
                         <a href="{% url 'news_detail' news_id=news_item.id %}" class="card-link">Read all</a>
                     </div>
                     <div class="card-footer text-muted">
-                        {{ news_item.created_at }}
+                        {{ news_item.created_at|date:"F d, Y, H:i" }}
                     </div>
                 </div>
 

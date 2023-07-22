@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'game.apps.GameConfig',
     'django_extensions',
     'django_celery_beat',
+    'faq.apps.FaqConfig',
 ]
 
 MIDDLEWARE = [

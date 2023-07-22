@@ -18,7 +18,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.conf.beat_schedule = {
     'run-task-every-1-minute': {
         'task': 'game.tasks.update_character_state',
-        'schedule': crontab(minute='*/3'),
+        'schedule': crontab(minute='*/1'),
     },
 }
 
