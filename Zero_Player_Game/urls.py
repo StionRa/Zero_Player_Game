@@ -45,5 +45,5 @@ urlpatterns = [
     path('info_line/', info_line, name='info_line'),
     path('character_param/', character_param, name='character_param'),
     path('inventory/', view_inventory, name='inventory'),
-    path('faq/', faq_view, name='faq')
+    path('faq/', faq_view, name='faq'),
 ]

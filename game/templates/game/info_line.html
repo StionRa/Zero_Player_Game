@@ -5,7 +5,7 @@
       {{ action_log.timestamp }}
 </div>
         <div class="bg-light">
-    {{ action_log.description }}
+    {{ action_log.description|safe }}
   </div>
     {% empty %}
         <p>No recent actions.</p>

@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'Zero_Player_Game.urls'
@@ -77,12 +78,6 @@ WSGI_APPLICATION = 'Zero_Player_Game.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -118,6 +113,12 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('uk', 'Українська'),  # Украинский
+    ('ru', 'Русский'),  # Русский
+]
+
 TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
@@ -129,6 +130,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'game/static')
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),  # Путь к глобальной директории locale в корневой папке проекта
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -141,4 +147,3 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # URL бэкенда рез�
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 # set the celery timezone
 CELERY_TIMEZONE = 'Europe/Warsaw'
-

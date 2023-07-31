@@ -10,9 +10,12 @@ from game.models.town_model import City
 from game.quest.quest_model import Quest
 from game.animal.animal_model import Animal
 from game.animal.animal_inventory import AnimalInventory
+from game.text_model.text_model import MultilingualText
+
 
 
 admin.site.register(News)
+admin.site.register(MultilingualText)
 admin.site.register(Comment)
 admin.site.register(Category)
 admin.site.register(ActionLog)

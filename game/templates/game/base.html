@@ -89,6 +89,19 @@
 
     <!-- Подключение скриптов Bootstrap -->
     <script src='{% static "js/bootstrap.bundle.js" %}'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+        $(document).ready(function() {
+            $('button').on('click', function() {
+                var language = $(this).data('language');
+                $.post('/change_language/', { language: language }, function(data) {
+                    if (data.success) {
+                        location.reload();  // Перезагружаем страницу после изменения языка
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>

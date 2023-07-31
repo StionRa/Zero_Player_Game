@@ -3,9 +3,11 @@ from game.models.back_to_city import back_to_city
 from game.quest.check_quest_completion import check_quest_completion
 from game.quest.quest_logic import make_quest_decision
 from game.quest.quest_model import Quest
+from game.character_logic.first_action_in_the_world import new_character
 
 
 def make_decision_what_to_do(character):
+    new_character(character)
     character.check_level_up()
     character.regenerate()
     character.sleep()

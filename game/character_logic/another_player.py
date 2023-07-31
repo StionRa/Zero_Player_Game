@@ -19,14 +19,14 @@ def greet(character):
     target_y = character.y
     other_character = Character.objects.filter(x=target_x, y=target_y).exclude(id=character.id).first()
     action_description = choice(
-        open('game/text/travel/greet_character.txt').readlines()).format(
+        open('game/text/travel/greet_character.xml').readlines()).format(
         name=character.name,
         other_character=other_character.name
     )
     time.sleep(sleep_time)
     ActionLog.objects.create(description=action_description, character=character)
     action_description_answer = choice(
-        open('game/text/travel/greet_character_answer.txt').readlines()).format(
+        open('game/text/travel/greet_character_answer.xml').readlines()).format(
         name=character.name,
         other_character=other_character.name
     )

@@ -15,9 +15,10 @@ from game.news.news_model import News, Category
 from game.game_options import MIN_TEMPERATURE, MAX_TEMPERATURE
 from decimal import Decimal
 
-
 min_temperature = Decimal(str(MIN_TEMPERATURE))
 max_temperature = Decimal(str(MAX_TEMPERATURE))
+
+
 
 
 def index_view(request):
@@ -135,6 +136,7 @@ def character_param(request):
     }
     return render(request, 'game/character_param.html', context)
 
+
 # views.py
 
 
@@ -150,4 +152,3 @@ def view_inventory(request):
         'inventory_items': inventory_items
     }
     return render(request, 'game/inventory.html', context)
-

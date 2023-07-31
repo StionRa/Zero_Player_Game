@@ -6,8 +6,9 @@ from game.animal.animal_inventory import AnimalInventory
 from game.battle.character_dead import character_dead
 from game.quest.check_quest_completion import check_quest_completion
 from game.game_options import SLEEP_TIME, CHARACTER_COST_BATTLE_WITH_ANIMAL
+from game.battle.atack_standart import attack
 
-sleep_time = SLEEP_TIME
+sleep_time = SLEEP_TIME / 2
 cost = CHARACTER_COST_BATTLE_WITH_ANIMAL
 
 
@@ -21,7 +22,7 @@ def get_or_create_animal_inventory(animal):
 
 
 def battle_with_animal(character, animal, quest, target_x, target_y):
-    action_description = choice(open('game/text/battle/battle_start.txt').readlines()).format(
+    action_description = choice(open('game/text/battle/battle_start.xml').readlines()).format(
         name=character.name,
         species=animal.species,
         animal=animal.name,
@@ -36,23 +37,10 @@ def battle_with_animal(character, animal, quest, target_x, target_y):
     animal_inventory.save()
     # Битва между персонажем и животным
     while character.health > 0 and animal.health > 0:
-        # Персонаж атакует
-        character.attack(animal)
-        action_description = choice(
-            open('game/text/battle/battle_character.txt').readlines()).format(
-            name=character.name,
-            species=animal.species,
-            animal=animal.name,
-            x=target_x,
-            y=target_y,
-            animal_health=animal.health,
-            character_health=character.health
-        )
-        ActionLog.objects.create(description=action_description, character=character)
-        # Проверка условия окончания битвы
+        attack(character, animal, character)
         if animal.health <= 0:
             action_description_lose = choice(
-                open('game/text/battle/animal_lose_battle.txt').readlines()).format(
+                open('game/text/battle/animal_lose_battle.xml').readlines()).format(
                 name=character.name,
                 species=animal.species,
                 animal=animal.name,
@@ -66,9 +54,7 @@ def battle_with_animal(character, animal, quest, target_x, target_y):
             if animal.animalinventory:
                 animal.animalinventory.transfer_items_to_character(character)
             character.experience += animal.experience
-            print(f"exp: {animal.experience}")
             quest.objective_progress += 1  # Increment the objective progress
-            print(f"progress + 1")
             character.stamina = max(character.stamina - cost, 0)
             character.save()
             quest.save()
@@ -76,28 +62,16 @@ def battle_with_animal(character, animal, quest, target_x, target_y):
             animal.save()
             animal.delete()
             check_quest_completion(character)  # Check if the quest is completed
-            print("ПРОДОЛЖАЕТ")
             break
         time.sleep(sleep_time)
         # Животное атакует
-        animal.attack(character)
-        action_description = choice(
-            open('game/text/battle/battle_animal.txt').readlines()).format(
-            name=character.name,
-            species=animal.species,
-            animal=animal.name,
-            x=target_x,
-            y=target_y,
-            animal_health=animal.health,
-            character_health=character.health
-        )
-        ActionLog.objects.create(description=action_description, character=character)
+        attack(animal, character, character)
         time.sleep(sleep_time)
         # Проверка условия окончания битвы
         if character.health <= 0:
             # Персонаж проиграл
             action_description_lose = choice(
-                open('game/text/battle/character_lose_battle.txt').readlines()).format(
+                open('game/text/battle/character_lose_battle.xml').readlines()).format(
                 name=character.name,
                 species=animal.species,
                 animal=animal.name,

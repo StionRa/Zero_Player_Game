@@ -17,7 +17,7 @@ def move(character, target_x, target_y):
         character.y = target_y
         character.stamina = max(character.stamina - step, 0)
         character.save()
-        action_description = choice(open('game/text/travel/travel.txt').readlines()).format(
+        action_description = choice(open('game/text/travel/travel.xml').readlines()).format(
             name=character.name,
             x=target_x,
             y=target_y,

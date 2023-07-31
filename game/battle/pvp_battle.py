@@ -4,7 +4,7 @@ from game.actionlog_model import ActionLog
 from game.battle.character_dead import character_dead
 from game.character_models import Character
 from game.game_options import SLEEP_TIME, CHARACTER_COST_BATTLE_PVP
-
+from game.battle.atack_standart import attack
 sleep_time = SLEEP_TIME
 cost = CHARACTER_COST_BATTLE_PVP
 
@@ -22,10 +22,11 @@ def battle_pvp(character):
         # Битва между персонажами
         while character.health > 0 and other_character.health > 0:
             # Персонаж атакует другого персонажа
-            character.attack(other_character)
-            action_description = f"{character.name} атаковал {other_character.name}, здоровье " \
-                                 f"{other_character.health}/{other_character.health_max}"
-            ActionLog.objects.create(description=action_description, character=character)
+            # character.attack(other_character)
+            attack(character, other_character, character)
+            # action_description = f"{character.name} атаковал {other_character.name}, здоровье " \
+            #                      f"{other_character.health}/{other_character.health_max}"
+            # ActionLog.objects.create(description=action_description, character=character)
 
             # Проверка условия окончания битвы
             if other_character.health <= 0:
@@ -40,10 +41,11 @@ def battle_pvp(character):
                 break
 
             # Другой персонаж атакует первого персонажа
-            other_character.attack(character)
-            action_description = f"{other_character.name} атаковал {character.name}, здоровье " \
-                                 f"{character.health}/{character.health_max}"
-            ActionLog.objects.create(description=action_description, character=character)
+            # other_character.attack(character)
+            attack(other_character, character, character)
+            # action_description = f"{other_character.name} атаковал {character.name}, здоровье " \
+            #                      f"{character.health}/{character.health_max}"
+            # ActionLog.objects.create(description=action_description, character=character)
 
             # Проверка условия окончания битвы
             if character.health <= 0:

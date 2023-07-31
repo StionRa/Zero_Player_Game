@@ -1,13 +1,9 @@
-import time
-
 from game.models.town_model import City
 from game.actionlog_model import ActionLog
 from game.quest.quest_generator import QuestGenerator
-from random import choice
 from game.quest.quest_model import Quest
-from time import sleep
 from game.game_options import SLEEP_TIME
-
+from random import choice
 sleep_time = SLEEP_TIME
 
 
@@ -20,6 +16,12 @@ def enter_city(character):
             print(f"Character health regenerated. {character.health}/{character.health_max}")
             return
         elif character.health == character.health_max:
+            action_description = choice(
+                open('game/text/city/enter_city.xml').readlines()).format(
+                name=character.name,
+                city=city.name,
+            )
+            ActionLog.objects.create(description=action_description, character=character)
             quest = Quest.objects.filter(character=character).first()
             active_quest = Quest.objects.filter(character=character, completed=True).first()
             unfinished_quest = Quest.objects.filter(character=character, completed=False).first()

@@ -1,9 +1,0 @@
-{name} met {species} {animal}
-{name} encountered {species} {animal}
-{name} found {species} {animal}
-{name} spotted {animal}
-{name} met {animal}
-{name} encountered {species} {animal} in the vicinity
-{name} encountered {species} {animal}
-{name} saw {animal}
-{name} tripped over {species}

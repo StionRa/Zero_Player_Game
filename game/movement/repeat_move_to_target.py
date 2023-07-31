@@ -22,7 +22,7 @@ def repeat_move(character, target_x, target_y):
                 if character.x == target_x and character.y == target_y:
                     print(f"Character {character.name} reached the target coordinates: ({target_x}, {target_y})")
                     action_description = choice(
-                        open('game/text/travel/character_thoughts.txt').readlines()).format(
+                        open('game/text/travel/character_thoughts.xml').readlines()).format(
                         name=character.name,
                         x=target_x,
                         y=target_y,

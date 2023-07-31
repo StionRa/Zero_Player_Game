@@ -81,16 +81,11 @@ class Character(models.Model):
     last_regeneration_stamina = models.DateTimeField(default=timezone.now)
     pvp_battle = models.IntegerField(default=0)
     mob_battle = models.IntegerField(default=0)
+    new_character = models.BooleanField(default=True)
 
     base_experience = 100  # Базовое количество опыта для первого уровня
     level_multiplier = 1.5  # Множитель уровня для экспоненциального повышения опыта
     regeneration_interval = 10
-
-    def attack(self, target):
-        damage = self.strength * 3 - target.defense * 0.2
-        target.health -= int(damage)
-        self.save()
-        target.save()
 
     def check_level_up(self):
         self.required_experience = self.base_experience * (self.level_multiplier ** self.level)
@@ -145,5 +140,3 @@ class Character(models.Model):
             return
         else:
             self.stamina += (((self.stamina_max - self.stamina) / self.regeneration) * self.level)
-
-

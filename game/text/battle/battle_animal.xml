@@ -1,0 +1,15 @@
+{animal} атакував {name}. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} вдарив {name}. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} атакував {name} зі силою. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} викликав {name} на бій. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} знизив либідо {name}. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} сміливо стрибнув на {name}. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} наніс удар {name}. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} несподівано атакував {name}. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} змусив {name} сказати - "Повалитися перед підвертнем!" Вдарив на {damage} : залишилось {character_health} HP!
+{animal} підступно приший {name} яйця назад. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} покакав у {name} тапочки. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} відбив атаку {name}. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} випустив свою гнів на {name}. Вдарив на {damage} : залишилось {character_health} HP!
+{animal} розірвав {name} своїми кігтями на {damage} : залишилось {character_health} HP!
+{animal} вдарив {name} смертельним ударом {damage} : залишилось {character_health} HP!

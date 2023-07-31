@@ -1,0 +1,15 @@
+{animal} атакував {name}. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} вдарив {name}. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} атакував {name} зі силою. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} викликав {name} на бій. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} знизив либідо {name}. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} сміливо стрибнув на {name}. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} наніс удар {name}. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} несподівано атакував {name}. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} змусив {name} сказати - "Повалитися перед підвертнем!" <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} підступно приший {name} яйця назад. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} покакав у {name} тапочки. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} відбив атаку {name}. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} випустив свою гнів на {name}. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} розірвав {name} своїми кігтями. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
+{animal} вдарив {name} смертельним ударом. <text class="red">Критичний удар</text> {damage} : залишилось {character_health} HP!
