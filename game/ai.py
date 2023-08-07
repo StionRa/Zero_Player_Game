@@ -5,14 +5,15 @@ from game.actionlog_model import ActionLog
 from game.pathfinding import a_star_search
 from random import choice
 from game.game_options import SLEEP_TIME, CHARACTER_COST_STEP
+from game.character_logic.character_phrases import phrase_choose
 
 sleep_time = SLEEP_TIME
 step = CHARACTER_COST_STEP
 
 
 def move(character, target_x, target_y):
-    target_cell = Location.objects.filter(x=target_x, y=target_y, passable=True).first()
-    if target_cell:
+    target_cell = Location.objects.filter(x=target_x, y=target_y).first()
+    if target_cell.passable:
         character.x = target_x
         character.y = target_y
         character.stamina = max(character.stamina - step, 0)
@@ -23,6 +24,7 @@ def move(character, target_x, target_y):
             y=target_y,
         )
         ActionLog.objects.create(description=action_description, character=character)
+        phrase_choose(character)
         print(f"Character {character.name} moved to coordinates: ({target_x}, {target_y})")
         time.sleep(sleep_time)
     else:

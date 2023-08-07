@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+
 from .character_models import Character
 from .inventory.inventory_model import Inventory
 
@@ -276,7 +277,6 @@ def create_character(request):
             luck += 7
             accuracy += 7
 
-        
         if profession == 'Warrior':
             strength += 10
             dexterity += 8
@@ -416,7 +416,9 @@ def create_character(request):
                                              regeneration=regeneration,
                                              intuition=intuition,
                                              luck=luck,
-                                             accuracy=accuracy)
+                                             accuracy=accuracy,
+                                             )
+        character.create_ai_model(character.name)
         get_or_create_inventory(character)
         character.save()
 

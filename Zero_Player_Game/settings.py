@@ -115,8 +115,8 @@ LANGUAGE_CODE = 'en-us'
 
 LANGUAGES = [
     ('en', 'English'),
-    ('uk', 'Українська'),  # Украинский
-    ('ru', 'Русский'),  # Русский
+    ('uk', 'Українська'),
+    ('ru', 'Русский'),
 ]
 
 TIME_ZONE = 'Europe/Warsaw'
@@ -132,7 +132,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'game/static')
 
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),  # Путь к глобальной директории locale в корневой папке проекта
+    os.path.join(BASE_DIR, 'locale'),
 ]
 
 # Default primary key field type
@@ -142,8 +142,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = "index"
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'  # URL брокера сообщений, например, Redis
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'  # URL бэкенда результатов, также может быть Redis
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 # set the celery timezone
 CELERY_TIMEZONE = 'Europe/Warsaw'

@@ -3,7 +3,6 @@ from game.quest.quest_model import Quest
 
 def check_quest_completion(character):
     active_quests = Quest.objects.filter(character=character, completed=False)
-    print('check for active quests:', active_quests)
     if not active_quests:
         return
     else:
@@ -14,4 +13,3 @@ def check_quest_completion(character):
                 character.have_quest = True
                 quest.save()
                 character.save()
-                print(f"Quest completed: {quest.name}")

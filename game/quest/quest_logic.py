@@ -11,7 +11,7 @@ def make_quest_decision(character):
     active_quests = Quest.objects.filter(character=character, completed=False)
     have_quest = character.have_quest
     complited_quest = character.is_quest_completed
-    print("Making quest decision for character:", character.name)
+    print(f"Making quest decision for character: {character.name}")
     if not complited_quest and have_quest:
         for quest in active_quests:
             if quest.task_model == "kill_animal":
@@ -19,21 +19,20 @@ def make_quest_decision(character):
                 target_x, target_y = find_nearest_animal(character)
                 if target_x is None or target_y is None:
                     handle_quest_error(character, quest)
-                    print('error')
                 else:
                     nearest_animal = Animal.objects.filter(x=target_x, y=target_y).first()
                     nearest_animal.is_active = False
                     nearest_animal.quest_character = character
                     nearest_animal.save()
                     repeat_move(character, target_x, target_y)
-                    print('repeat move to target', target_x, target_y)
+                    print(f'repeat move to target: {target_x}, {target_y}')
                     if nearest_animal:
                         if quest.objective_progress < quest.objective_quantity:
                             if nearest_animal is None:
                                 # No animal found at the specified location
                                 continue
                             else:
-                                battle_with_animal(character, nearest_animal, quest, target_x, target_y)
+                                battle_with_animal(character, nearest_animal, quest)
                     else:
                         handle_no_active_animal_error(character, quest)
                         continue

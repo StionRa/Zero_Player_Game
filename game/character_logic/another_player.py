@@ -14,10 +14,7 @@ sleep_time = SLEEP_TIME
 greeted_characters = {}
 
 
-def greet(character):
-    target_x = character.x
-    target_y = character.y
-    other_character = Character.objects.filter(x=target_x, y=target_y).exclude(id=character.id).first()
+def greet(character, other_character):
     action_description = choice(
         open('game/text/travel/greet_character.xml').readlines()).format(
         name=character.name,
@@ -49,12 +46,10 @@ def make_choice_what_to_do(character):
     other_character = Character.objects.filter(x=target_x, y=target_y).exclude(id=character.id).first()
     if other_character and character.x == other_character.x and character.y == other_character.y:
         if city and other_character:
-            greet(character)
-            time.sleep(sleep_time)
+            greet(character, other_character)
         else:
             actions = [greet, initiate_battle]
             selected_actions = choice(actions)
             selected_actions(character)
-            time.sleep(sleep_time)
     else:
         return

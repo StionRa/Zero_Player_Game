@@ -2,8 +2,12 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
+from game.character_logic.ai_character_model import AICharacterModel
 from game.finder.find_exit_point import find_exit_point
 from game.models.town_model import City
+
+input_size = 8
+output_size = 2
 
 
 class Character(models.Model):
@@ -83,6 +87,8 @@ class Character(models.Model):
     mob_battle = models.IntegerField(default=0)
     new_character = models.BooleanField(default=True)
 
+    # flags
+
     base_experience = 100  # Базовое количество опыта для первого уровня
     level_multiplier = 1.5  # Множитель уровня для экспоненциального повышения опыта
     regeneration_interval = 10
@@ -110,12 +116,40 @@ class Character(models.Model):
         self.luck += attribute_increase
         self.accuracy += attribute_increase
 
+    @classmethod
+    def create_ai_model(cls, character_name):
+        ai_model = AICharacterModel(input_size=input_size, output_size=output_size)
+        file_path = f'{character_name}_ai_model.h5'
+        ai_model.save_model_state_to_hdf5(file_path)
+        return ai_model
+
+    @classmethod
+    def load_model(cls, character_name):
+        ai_model = AICharacterModel(input_size=input_size, output_size=output_size)
+        file_path = f'{character_name}_ai_model.h5'
+        ai_model.load_model_state_from_hdf5(file_path)
+        return ai_model
+
     def regenerate(self):
-        if self.health == self.health_max:
-            return
+        if self.health < 0:
+            self.health = 0
+        elif self.health >= 100:
+            self.health = 100
         else:
-            self.health += ((self.health_max - self.health) / self.regeneration) + self.level
-            self.save()
+            if self.health == self.health_max:
+                self.health = self.health_max
+            else:
+                self.health += ((self.health_max - self.health) / self.regeneration) + self.level
+        self.save()
+
+    def sleep(self):
+        if self.stamina < 0:
+            self.stamina = 0
+        elif self.stamina > self.stamina_max:
+            self.stamina = self.stamina_max
+        else:
+            self.stamina += (((self.stamina_max - self.stamina) / self.regeneration) + self.level)
+        self.save()
 
     def is_in_city(self):
         city = City.objects.filter(x_coordinate=self.x, y_coordinate=self.y).first()
@@ -134,9 +168,3 @@ class Character(models.Model):
                 print("Exit point from the city not found.")
         else:
             print("Character is not in the city.")
-
-    def sleep(self):
-        if self.stamina == self.stamina_max:
-            return
-        else:
-            self.stamina += (((self.stamina_max - self.stamina) / self.regeneration) * self.level)

@@ -16,7 +16,6 @@ def make_decision_what_to_do(character):
     active_quests = Quest.objects.filter(character=character, completed=False)
     if not character.is_quest_completed and character.have_quest and active_quests:
         make_quest_decision(character)
-    elif character.health <= 0:
-        back_to_city(character)
     else:
         back_to_city(character)
+

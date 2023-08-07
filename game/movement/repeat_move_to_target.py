@@ -1,5 +1,3 @@
-import time
-
 from game.actionlog_model import ActionLog
 from game.ai import make_decision_and_move, take_path, move
 from random import choice
@@ -28,7 +26,6 @@ def repeat_move(character, target_x, target_y):
                         y=target_y,
                     )
                     ActionLog.objects.create(description=action_description, character=character)
-                    time.sleep(sleep_time)
                     return
         else:
             print("No valid path found.")

@@ -14,11 +14,11 @@ from game.location_model.print_map import print_map
 from game.news.news_model import News, Category
 from game.game_options import MIN_TEMPERATURE, MAX_TEMPERATURE
 from decimal import Decimal
+from game.character_logic.character_phrases import mood_phrases, mood_name
+from game.character_logic.the_master_brain_of_ai import AICharacter
 
 min_temperature = Decimal(str(MIN_TEMPERATURE))
 max_temperature = Decimal(str(MAX_TEMPERATURE))
-
-
 
 
 def index_view(request):
@@ -131,8 +131,12 @@ def info_line(request):
 def character_param(request):
     user = request.user
     character = Character.objects.get(user=user)
+    # ai_character = AICharacter.objects.get(character=character)  # Retrieve the associated AICharacter
+    mood = mood_phrases(character)
+    mood_status = mood_name(mood)
     context = {
-        'character': character
+        'character': character,
+        "mood_status": mood_status
     }
     return render(request, 'game/character_param.html', context)
 
