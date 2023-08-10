@@ -145,11 +145,13 @@ class Character(models.Model):
     def sleep(self):
         if self.stamina < 0:
             self.stamina = 0
-        elif self.stamina > self.stamina_max:
+        elif self.stamina >= 100:
             self.stamina = self.stamina_max
         else:
-            self.stamina += (((self.stamina_max - self.stamina) / self.regeneration) + self.level)
-        self.save()
+            if self.stamina == self.stamina_max:
+                self.stamina = self.stamina_max
+            else:
+                self.stamina += ((self.stamina_max - self.stamina) / self.regeneration) + self.level
 
     def is_in_city(self):
         city = City.objects.filter(x_coordinate=self.x, y_coordinate=self.y).first()

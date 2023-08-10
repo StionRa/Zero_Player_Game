@@ -11,9 +11,9 @@ app = Celery('Zero_Player_Game')
 
 # Загрузка настроек из файла settings.py проекта Django
 app.config_from_object('django.conf:settings', namespace='CELERY')
-app.conf.task_acks_late = True
+app.conf.task_acks_late = False
 app.conf.worker_prefetch_multiplier = 1
-app.conf.broker_connection_retry_on_startup = False
+app.conf.broker_connection_retry_on_startup = True
 app.conf.beat_schedule = {
     'run-task-every-1-minute': {
         'task': 'game.tasks.update_character_state',
